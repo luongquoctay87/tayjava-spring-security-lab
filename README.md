@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-09-password-encoder` |
-| Parent | `lesson-08-authentication-manager` |
-| Lesson | 09 — PasswordEncoder |
-| What changed | BCrypt PasswordEncoder; demo users store encoded passwords |
+| Branch | `lesson-10-multiple-chains` |
+| Parent | `lesson-09-password-encoder` |
+| Lesson | 10 — multiple SecurityFilterChain |
+| What changed | Split ApiSecurityConfig (/api/** STATELESS) and WebSecurityConfig (form login) |
 
 
 ## Run

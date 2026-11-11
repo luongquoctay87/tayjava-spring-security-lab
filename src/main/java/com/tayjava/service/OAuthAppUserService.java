@@ -41,7 +41,7 @@ public class OAuthAppUserService {
   }
 
   private AppUser createStudent(String email, String preferredUsername, String registrationId) {
-    Role student =
+    Role studentRole =
         roles
             .findByName(Authorities.Role.STUDENT)
             .orElseThrow(() -> new IllegalStateException("STUDENT role missing — seed RBAC first"));
@@ -52,10 +52,12 @@ public class OAuthAppUserService {
     String username = uniqueUsername(base);
     AppUser user =
         new AppUser(username, passwordEncoder.encode("oauth-only-" + UUID.randomUUID()), email);
-    user.setRoles(Set.of(student));
-    AppUser saved = appUsers.save(user);
+    user.setRoles(Set.of(studentRole));
+    AppUser saved = appUsers.saveAndFlush(user);
     log.info("Created AppUser {} from OAuth provider {}", saved.getUsername(), registrationId);
-    return saved;
+    return appUsers
+        .findByUsernameWithRolesAndPermissions(saved.getUsername())
+        .orElse(saved);
   }
 
   private String uniqueUsername(String base) {

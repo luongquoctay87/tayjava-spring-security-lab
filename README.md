@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-41-audit` |
-| Parent | `lesson-40-jwt-oauth-test` |
-| Lesson | 41 — Audit / security events |
-| What changed | Structured security audit events via listener + AuditWriter (no secret leakage) |
+| Branch | `lesson-42-capstone` |
+| Parent | `lesson-41-audit` |
+| Lesson | 42 — Capstone checklist + Flyway |
+| What changed | Flyway as schema SoT (`ddl-auto=validate`); production checklist; ddl/ mirrored reference |
 
 ## Demo users
 
@@ -73,9 +73,13 @@ See `.env.example` for JWT and OAuth client env vars. Never commit a real secret
 
 OAuth2 login (web): set `GOOGLE_CLIENT_*` / `GITHUB_CLIENT_*`, then open `/login` or `/oauth2/authorization/google`.
 
-## DDL
+## DDL / Flyway
 
-See `ddl/README.md`. Runtime uses H2 + `RbacDataSeeder`; SQL files are the PostgreSQL reference.
+**Source of truth:** `src/main/resources/db/migration/` (Flyway). See `ddl/README.md` for mirrored reference SQL. Runtime: H2 + Flyway + `RbacDataSeeder`.
+
+## Capstone checklist
+
+See `docs/CAPSTONE_CHECKLIST.md`.
 
 ## Test
 

@@ -1,6 +1,6 @@
-# lesson-41-audit
+# lesson-42-capstone
 
-- **Parent:** `lesson-40-jwt-oauth-test`
-- **What changed:** Security audit listener + `AuditWriter` + in-memory `AuditEventRepository`; actuator exposure limited; DDL sketch for append-only audit table
+- **Parent:** `lesson-41-audit`
+- **What changed:** Flyway migrations as schema source of truth (`ddl-auto=validate`); capstone checklist; ddl/ retained as mirrored reference; temporary lab notes cleaned in README
 
 Run: `./mvnw -q test`

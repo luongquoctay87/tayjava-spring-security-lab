@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-07-security-context` |
-| Parent | `lesson-06-security-filter-chain` |
-| Lesson | 07 — SecurityContextHolder / Principal |
-| What changed | GET /api/me returns Authentication from SecurityContextHolder |
+| Branch | `lesson-08-authentication-manager` |
+| Parent | `lesson-07-security-context` |
+| Lesson | 08 — AuthenticationManager / UserDetailsService |
+| What changed | DemoUserDetailsService + exposed AuthenticationManager bean |
 
 
 ## Run

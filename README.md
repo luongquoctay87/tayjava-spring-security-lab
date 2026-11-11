@@ -25,18 +25,6 @@ This repository is a companion for learning — not the TayJava production backe
 | Persistence (later) | Spring Data JPA, PostgreSQL, Flyway |
 | Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
 
-## Project coordinates
-
-| | |
-|---|---|
-| Group / artifact | `com.tayjava` / `tayjava-spring-security-lab` |
-| Main class | `com.tayjava.TayJavApplication` |
-| Default branch | `master` — lesson 04 skeleton |
-| Port | `8080` |
-| Demo user (master) | `an.student` / `demo1234` |
-| License | MIT |
-| Branch map | `blogs/java/spring-security/lab-samples-map.md` (TayJava blogs workspace) |
-
 ## This branch
 
 | | |
@@ -58,15 +46,3 @@ This repository is a companion for learning — not the TayJava production backe
 ```bash
 ./mvnw -q test
 ```
-
-## Lesson → branch (project line)
-
-See the full Parent→Branch map in `blogs/java/spring-security/lab-samples-map.md`. Highlights:
-
-| Lesson | Branch |
-|--------|--------|
-| 04 | `master` |
-| 06 | `lesson-06-security-filter-chain` |
-| 20 | `lesson-20-rbac` |
-| 26 | `lesson-26-auth-entry-point` |
-| 42 | `lesson-42-capstone` |

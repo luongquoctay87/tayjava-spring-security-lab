@@ -1,6 +1,6 @@
-# lesson-36-cors-headers
+# lesson-37-brute-force
 
-- **Parent:** `lesson-35-domain-object`
-- **What changed:** `CorsConfigurationSource` + `http.cors(withDefaults())` on API/web chains; CSP / frame / referrer security headers
+- **Parent:** `lesson-36-cors-headers`
+- **What changed:** Login soft-lock via `LoginAttemptService` + auth events; `LoginRateLimitFilter` returns 429 when IP budget exhausted
 
 Run: `./mvnw -q test`

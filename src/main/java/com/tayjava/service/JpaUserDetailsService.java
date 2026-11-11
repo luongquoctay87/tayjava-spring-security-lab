@@ -15,14 +15,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Lesson 20: load ROLE_* + permission authorities from AppUser / Role / Permission.
- */
+/** Lesson 37: soft-lock via LoginAttemptService → isAccountNonLocked(). */
 @Service
 @RequiredArgsConstructor
 public class JpaUserDetailsService implements UserDetailsService {
 
   private final AppUserRepository appUserRepository;
+  private final LoginAttemptService loginAttemptService;
 
   @Override
   @Transactional(readOnly = true)
@@ -32,10 +31,13 @@ public class JpaUserDetailsService implements UserDetailsService {
             .findByUsernameWithRolesAndPermissions(username)
             .orElseThrow(() -> new UsernameNotFoundException("Unknown user: " + username));
 
+    boolean locked = loginAttemptService.isUsernameLocked(user.getUsername());
+
     return User.withUsername(user.getUsername())
         .password(user.getPassword())
         .authorities(toAuthorities(user))
         .disabled(!user.isEnabled())
+        .accountLocked(locked)
         .build();
   }
 

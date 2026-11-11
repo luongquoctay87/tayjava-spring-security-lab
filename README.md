@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-36-cors-headers` |
-| Parent | `lesson-35-domain-object` |
-| Lesson | 36 — CORS + security headers |
-| What changed | CORS bean + CSP/frame security headers on both filter chains |
+| Branch | `lesson-37-brute-force` |
+| Parent | `lesson-36-cors-headers` |
+| Lesson | 37 — Brute-force / rate limit login |
+| What changed | Soft-lock login by username/IP + rate-limit filter on /api/auth/login |
 
 ## Demo users
 

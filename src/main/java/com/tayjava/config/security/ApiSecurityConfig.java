@@ -2,6 +2,7 @@ package com.tayjava.config.security;
 
 import static com.tayjava.config.security.Authorities.Perm;
 
+import com.tayjava.service.LoginAttemptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class ApiSecurityConfig {
   private final JwtAuthenticationConverter jwtAuthenticationConverter;
   private final ApiAuthenticationEntryPoint apiAuthenticationEntryPoint;
   private final ApiAccessDeniedHandler apiAccessDeniedHandler;
+  private final LoginAttemptService loginAttemptService;
 
   @Bean
   @Order(1)
@@ -83,6 +85,7 @@ public class ApiSecurityConfig {
                     .authenticationEntryPoint(apiAuthenticationEntryPoint)
                     .accessDeniedHandler(apiAccessDeniedHandler)
                     .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
+        .addFilterBefore(new LoginRateLimitFilter(loginAttemptService), BearerTokenAuthenticationFilter.class)
         .addFilterAfter(new TenantContextFilter(), BearerTokenAuthenticationFilter.class);
     return http.build();
   }

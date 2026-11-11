@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-10-multiple-chains` |
-| Parent | `lesson-09-password-encoder` |
-| Lesson | 10 — multiple SecurityFilterChain |
-| What changed | Split ApiSecurityConfig (/api/** STATELESS) and WebSecurityConfig (form login) |
+| Branch | `lesson-11-form-login` |
+| Parent | `lesson-10-multiple-chains` |
+| Lesson | 11 — form login |
+| What changed | Custom Thymeleaf /login page wired into WebSecurityConfig |
 
 
 ## Run

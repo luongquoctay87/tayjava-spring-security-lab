@@ -1,6 +1,6 @@
-# lesson-10-multiple-chains
+# lesson-11-form-login
 
-- **Parent:** `lesson-09-password-encoder`
-- **What changed:** Split ApiSecurityConfig (/api/** STATELESS) and WebSecurityConfig (form login)
+- **Parent:** `lesson-10-multiple-chains`
+- **What changed:** Custom Thymeleaf /login page wired into WebSecurityConfig
 
 Run: `./mvnw -q test`

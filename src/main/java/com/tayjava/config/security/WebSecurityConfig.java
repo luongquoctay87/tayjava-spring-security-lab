@@ -20,7 +20,7 @@ public class WebSecurityConfig {
                     .permitAll()
                     .anyRequest()
                     .authenticated())
-        .formLogin(Customizer.withDefaults())
+        .formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
         .logout(Customizer.withDefaults());
     return http.build();
   }

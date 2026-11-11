@@ -1,6 +1,6 @@
-# lesson-19-authorization-manager
+# lesson-20-rbac
 
-- **Parent:** `lesson-18-method-security`
-- **What changed:** Custom `EnrolledCourseAuthorizationManager` + lecture endpoint; enrollment stub for `an.student` → course `1`
+- **Parent:** `lesson-19-authorization-manager`
+- **What changed:** RBAC `AppUser` / `Role` / `Permission` + `JpaUserDetailsService`; `ddl/` + H2 seeder for demo users
 
 Run: `./mvnw -q test`

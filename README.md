@@ -22,7 +22,7 @@ This repository is a companion for learning — not the TayJava production backe
 | Web | Spring MVC (`spring-boot-starter-webmvc`) |
 | Security | `spring-boot-starter-security` + `spring-security-test` |
 | Build | Maven Wrapper (`./mvnw`) |
-| Persistence (later) | Spring Data JPA, PostgreSQL, Flyway |
+| Persistence | Spring Data JPA + H2 (lab); `ddl/` for PostgreSQL reference |
 | Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
 
 ## Project coordinates
@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-19-authorization-manager` |
-| Parent | `lesson-18-method-security` |
-| Lesson | 19 — Custom `AuthorizationManager` |
-| What changed | `EnrolledCourseAuthorizationManager` for `GET /api/courses/{courseId}/lectures`; in-memory enrollment access |
+| Branch | `lesson-20-rbac` |
+| Parent | `lesson-19-authorization-manager` |
+| Lesson | 20 — RBAC with AppUser / Role / Permission |
+| What changed | JPA entities + repositories; `JpaUserDetailsService`; `RbacDataSeeder`; `ddl/` schema/seed reference; H2 for lab runtime |
 
 ## Demo users
 
@@ -59,7 +59,12 @@ This repository is a companion for learning — not the TayJava production backe
 
 ```bash
 ./mvnw spring-boot:run
+# RBAC seed runs on empty DB (an.student / bao.teacher / chi.teacher / root.admin)
 ```
+
+## DDL
+
+See `ddl/README.md`. Runtime uses H2 + `RbacDataSeeder`; SQL files are the PostgreSQL reference.
 
 ## Test
 

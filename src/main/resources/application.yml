@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: tayjava-spring-security-lab
+  # Lesson 04 demo user — replaced by UserDetailsService / DB users in later lessons.
+  security:
+    user:
+      name: an.student
+      password: demo1234
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.tayjava: INFO
+    org.springframework.security: INFO

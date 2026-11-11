@@ -1,0 +1,18 @@
+# Profile: external-jwt
+# Validates Bearer JWTs issued by an external Authorization Server (Keycloak / Auth0 / …).
+# Example: ./mvnw spring-boot:run -Dspring-boot.run.profiles=external-jwt
+#
+# NOTE: self-issued POST /api/auth/login (HS256) is disabled under this profile.
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${TAYJAVA_JWT_ISSUER_URI:http://localhost:8081/realms/tayjava}
+
+tayjava:
+  jwt:
+    # Still required for property binding / audience checks; not used to sign when external-jwt is on.
+    secret: ${TAYJAVA_JWT_SECRET:lab-external-profile-secret-32chars!!}
+    issuer: ${TAYJAVA_JWT_ISSUER_URI:http://localhost:8081/realms/tayjava}
+    audience: ${TAYJAVA_JWT_AUDIENCE:tayjava-api}

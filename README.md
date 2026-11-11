@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-28-oauth2-login` |
-| Parent | `lesson-26-auth-entry-point` |
-| Lesson | 28 — OAuth2 Login (Google/GitHub) |
-| What changed | `oauth2Login` on web chain; client id/secret from env (see `.env.example`); link/create `AppUser` on first social login |
+| Branch | `lesson-29-resource-server` |
+| Parent | `lesson-28-oauth2-login` |
+| Lesson | 29 — Resource Server JWT / opaque |
+| What changed | Default: self-issued HS256 Resource Server; profile `external-jwt` uses `issuer-uri`/JWKS; profile `opaque` documents introspection |
 
 ## Demo users
 

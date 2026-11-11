@@ -7,6 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -20,10 +21,10 @@ import org.springframework.security.oauth2.jwt.JwtClaimValidator;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 
 /**
- * Lesson 23: {@link JwtEncoder} for login issuance. {@link JwtDecoder} is registered now so the
- * next lesson can wire {@code oauth2ResourceServer().jwt()} without changing signing beans.
+ * Self-issued HS256 JWT (default). Active unless profile {@code external-jwt} is enabled.
  */
 @Configuration
+@Profile("!external-jwt")
 @EnableConfigurationProperties(JwtProperties.class)
 public class JwtConfig {
 

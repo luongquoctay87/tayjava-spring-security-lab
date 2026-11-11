@@ -1,0 +1,14 @@
+# Profile: opaque (documentation / optional lab extension)
+# Instant revocation via token introspection. Requires a reachable Authorization Server.
+# Example: ./mvnw spring-boot:run -Dspring-boot.run.profiles=opaque
+#
+# Wire ApiSecurityConfig to .oauth2ResourceServer(o -> o.opaqueToken(Customizer.withDefaults()))
+# when activating this profile in a follow-up exercise.
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: ${TAYJAVA_INTROSPECTION_URI:http://localhost:8081/realms/tayjava/protocol/openid-connect/token/introspect}
+          client-id: ${TAYJAVA_INTROSPECTION_CLIENT_ID:tayjava-api}
+          client-secret: ${TAYJAVA_INTROSPECTION_CLIENT_SECRET:change-me}

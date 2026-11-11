@@ -1,6 +1,6 @@
-# lesson-28-oauth2-login
+# lesson-29-resource-server
 
-- **Parent:** `lesson-26-auth-entry-point`
-- **What changed:** OAuth2 Login (Google + GitHub) on the web chain via env client id/secret placeholders; link/create local `AppUser` on first social sign-in
+- **Parent:** `lesson-28-oauth2-login`
+- **What changed:** Clarify Resource Server role: default remains self-issued HS256; profile `external-jwt` validates via `issuer-uri`/JWKS; profile `opaque` documents introspection placeholders; audience validator covered by tests
 
-Run: `./mvnw -q test` (real Google/GitHub consoles needed only for browser sign-in)
+Run: `./mvnw -q test`

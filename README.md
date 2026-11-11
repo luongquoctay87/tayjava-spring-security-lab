@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-08-authentication-manager` |
-| Parent | `lesson-07-security-context` |
-| Lesson | 08 — AuthenticationManager / UserDetailsService |
-| What changed | DemoUserDetailsService + exposed AuthenticationManager bean |
+| Branch | `lesson-09-password-encoder` |
+| Parent | `lesson-08-authentication-manager` |
+| Lesson | 09 — PasswordEncoder |
+| What changed | BCrypt PasswordEncoder; demo users store encoded passwords |
 
 
 ## Run

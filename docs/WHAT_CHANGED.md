@@ -1,6 +1,6 @@
-# lesson-08-authentication-manager
+# lesson-09-password-encoder
 
-- **Parent:** `lesson-07-security-context`
-- **What changed:** DemoUserDetailsService + exposed AuthenticationManager bean
+- **Parent:** `lesson-08-authentication-manager`
+- **What changed:** BCrypt PasswordEncoder; demo users store encoded passwords
 
 Run: `./mvnw -q test`

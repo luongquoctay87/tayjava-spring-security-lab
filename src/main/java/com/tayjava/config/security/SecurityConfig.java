@@ -8,10 +8,12 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson 08: AuthenticationManager exposed for programmatic auth (login later).
+ * Lesson 09: AuthenticationManager exposed for programmatic auth (login later).
  * UserDetailsService is {@link com.tayjava.service.DemoUserDetailsService}.
  */
 @Configuration
@@ -36,6 +38,11 @@ public class SecurityConfig {
         .httpBasic(Customizer.withDefaults())
         .formLogin(Customizer.withDefaults());
     return http.build();
+  }
+
+  @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
   }
 
   @Bean

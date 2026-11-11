@@ -38,7 +38,14 @@ public class WebSecurityConfig {
                 sm.sessionFixation(sf -> sf.changeSessionId())
                     .maximumSessions(1)
                     .maxSessionsPreventsLogin(false))
-        .logout(Customizer.withDefaults());
+        .logout(
+            logout ->
+                logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login?logout")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID", "remember-me")
+                    .permitAll());
     return http.build();
   }
 

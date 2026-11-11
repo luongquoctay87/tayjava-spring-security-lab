@@ -1,6 +1,6 @@
-# lesson-13-remember-me
+# lesson-14-logout
 
-- **Parent:** `lesson-12-session`
-- **What changed:** Remember-me cookie on web chain (demo key only)
+- **Parent:** `lesson-13-remember-me`
+- **What changed:** Logout clears session + remember-me cookie; login shows logout banner
 
 Run: `./mvnw -q test`

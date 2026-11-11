@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-13-remember-me` |
-| Parent | `lesson-12-session` |
-| Lesson | 13 — remember-me |
-| What changed | Remember-me cookie on web chain (demo key only) |
+| Branch | `lesson-14-logout` |
+| Parent | `lesson-13-remember-me` |
+| Lesson | 14 — logout |
+| What changed | Logout clears session + remember-me cookie; login shows logout banner |
 
 
 ## Run

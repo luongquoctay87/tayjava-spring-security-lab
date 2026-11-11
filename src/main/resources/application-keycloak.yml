@@ -1,0 +1,10 @@
+# Activate with: --spring.profiles.active=keycloak
+# Requires Keycloak from docker-compose.yml (http://localhost:8180).
+# When using issuer-uri, remove / override the lab JwtDecoder bean or use a separate config class.
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/tayjava
+          audiences: tayjava-api

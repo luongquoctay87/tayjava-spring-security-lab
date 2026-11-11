@@ -1,14 +1,16 @@
 spring:
   application:
     name: tayjava-spring-security-lab
-  # Lesson 04 demo user — replaced by UserDetailsService / DB users in later lessons.
-  security:
-    user:
-      name: an.student
-      password: demo1234
 
 server:
   port: 8080
+
+tayjava:
+  keycloak:
+    client-id: tayjava-api
+  # Lab HS256 secret for offline tests / local minting — not a Keycloak signing key.
+  jwt:
+    secret: ${TAYJAVA_JWT_SECRET:tayjava-lab-demo-secret-32bytes!!}
 
 logging:
   level:

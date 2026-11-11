@@ -1,72 +1,35 @@
-# TayJava Spring Security Lab
+# Demo: Keycloak SSO (lesson 31)
 
-Sample Spring Boot + Spring Security application that grows with the **TayJava Spring Security** article series.
-
-Readers build one continuous app while learning Spring Security 7 on Boot 4: from the first secured app, through form login / session / CSRF, RBAC, JWT APIs, and a production checklist. Each lesson that changes the code has a matching **git branch**.
-
-This repository is a companion for learning — not the TayJava production backend.
-
-## What you will build
-
-- Layered monolith under package `com.tayjava` (`controller` / `service` / `entity` / `common` / `config.security`)
-- AuthN/Z around Course APIs and admin surfaces (`STUDENT` / `INSTRUCTOR` / `ADMIN`)
-- Form login + session, then stateless JWT (`/api/auth/login`, refresh), later OAuth2 / Resource Server lessons
-- Centralized errors (`ErrorException` / `Resp`) aligned with `e-learning`
-
-## Tech stack
-
-| Area | Choice |
-|------|--------|
-| Language | Java 21 |
-| Framework | Spring Boot 4.0.9 + Spring Security 7.x |
-| Web | Spring MVC (`spring-boot-starter-webmvc`) |
-| Security | `spring-boot-starter-security` + `spring-security-test` |
-| Build | Maven Wrapper (`./mvnw`) |
-| Persistence (later) | Spring Data JPA, PostgreSQL, Flyway |
-| Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
-
-## Project coordinates
+**Kind:** `demo` (side branch — do **not** merge into the Auth API project line)
 
 | | |
 |---|---|
-| Group / artifact | `com.tayjava` / `tayjava-spring-security-lab` |
-| Main class | `com.tayjava.TayJavApplication` |
-| Default branch | `master` — lesson 04 skeleton |
-| Port | `8080` |
-| Demo user (master) | `an.student` / `demo1234` |
-| License | MIT |
-| Branch map | `blogs/java/spring-security/lab-samples-map.md` (TayJava blogs workspace) |
+| Branch | `demo/lesson-31-keycloak` |
+| Parent | `master` |
+| Package | `com.tayjava.demo` |
+| Entry | `com.tayjava.TayJavApplication` |
 
-## This branch
+## What changed
 
-| | |
-|---|---|
-| Branch | `master` |
-| Lesson | 04 — first Spring Security app on Boot |
-| Parent | — |
-| What changed | Skeleton: Boot 4 + Security starter, `TayJavApplication`, default user in `application.yml`, context-load test |
+Keycloak compose/realm demo + Spring resource-server role mapping:
 
-## Run
+- `docker-compose.yml` — Keycloak 26.4 on `:8180` (`start-dev --import-realm`)
+- `keycloak/import/tayjava-realm.json` — realm `tayjava`, clients `tayjava-web` / `tayjava-api`, users `an.student` / `bao.teacher`
+- `KeycloakJwtAuthenticationConverter` — `realm_access` + `resource_access` → `ROLE_*`
+- `DemoSecurityConfig` + `DemoApiController` — sample `/api/public`, `/api/me`, `/api/admin/ping`
+- Gate tests: converter mapping, anonymous `401`, student `403` on admin, admin `200`
 
-```bash
-./mvnw spring-boot:run
-# default form login with an.student / demo1234
-```
+Default profile uses a local HS256 `JwtDecoder` so `./mvnw test` works **without** Docker. Profile `keycloak` documents `issuer-uri` for a live IdP.
 
-## Test
+## Run / test
 
 ```bash
 ./mvnw -q test
+
+# Optional live Keycloak
+docker compose up -d
+# Admin console: http://localhost:8180  (admin / admin — local only)
 ```
 
-## Lesson → branch (project line)
-
-See the full Parent→Branch map in `blogs/java/spring-security/lab-samples-map.md`. Highlights:
-
-| Lesson | Branch |
-|--------|--------|
-| 04 | `master` |
-| 06 | `lesson-06-security-filter-chain` |
-| 20 | `lesson-20-rbac` |
-| 26 | `lesson-26-auth-entry-point` |
-| 42 | `lesson-42-capstone` |
+Realm users: `an.student` / `bao.teacher` — password `demo1234`.
+Web client secret in import file: `lab-keycloak-web-secret` (lab only).

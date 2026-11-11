@@ -1,0 +1,89 @@
+{
+  "realm": "tayjava",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "roles": {
+    "realm": [
+      { "name": "student", "description": "TayJava STUDENT" },
+      { "name": "instructor", "description": "TayJava INSTRUCTOR" },
+      { "name": "admin", "description": "TayJava ADMIN", "composite": true, "composites": { "realm": ["instructor"] } }
+    ]
+  },
+  "users": [
+    {
+      "username": "an.student",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "An",
+      "lastName": "Student",
+      "credentials": [
+        { "type": "password", "value": "demo1234", "temporary": false }
+      ],
+      "realmRoles": ["student"]
+    },
+    {
+      "username": "bao.teacher",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Bao",
+      "lastName": "Teacher",
+      "credentials": [
+        { "type": "password", "value": "demo1234", "temporary": false }
+      ],
+      "realmRoles": ["instructor"]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "tayjava-web",
+      "name": "TayJava Web",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "lab-keycloak-web-secret",
+      "redirectUris": ["http://localhost:8081/login/oauth2/code/keycloak"],
+      "webOrigins": ["http://localhost:8081"],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "post.logout.redirect.uris": "http://localhost:8081/"
+      },
+      "protocolMappers": [
+        {
+          "name": "tayjava-api-audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "tayjava-api",
+            "id.token.claim": "false",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "tayjava-api",
+      "name": "TayJava API",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "lab-keycloak-api-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "protocol": "openid-connect"
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "roles",
+      "protocol": "openid-connect",
+      "attributes": { "include.in.token.scope": "true" }
+    }
+  ]
+}

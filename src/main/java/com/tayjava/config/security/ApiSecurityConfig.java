@@ -7,23 +7,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 /**
- * API chain: {@code STATELESS}, CSRF off, {@code POST /api/auth/login} permitAll. Lesson 23 issues
- * JWT at login; Bearer verification via {@code oauth2ResourceServer} arrives in the next lesson —
- * {@code httpBasic} remains so existing MockMvc user processors still exercise authorize rules.
+ * Lesson 24: {@code oauth2ResourceServer().jwt()} registers {@code BearerTokenAuthenticationFilter}
+ * on the {@code /api/**} chain. API clients authenticate with {@code Authorization: Bearer}.
  */
 @Configuration
 @RequiredArgsConstructor
 public class ApiSecurityConfig {
 
   private final EnrolledCourseAuthorizationManager enrolledCourseAuthorizationManager;
+  private final JwtAuthenticationConverter jwtAuthenticationConverter;
 
   @Bean
   @Order(1)
@@ -51,15 +49,11 @@ public class ApiSecurityConfig {
                     .authenticated()
                     .anyRequest()
                     .authenticated())
-        // 1. SecurityContext lives only for this request — nothing in HttpSession
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        // 2. API clients do not redirect-after-login
         .requestCache(cache -> cache.disable())
-        // 3. Safe while auth is Authorization header / httpBasic — not cookie session
         .csrf(csrf -> csrf.disable())
-        .httpBasic(Customizer.withDefaults())
-        .exceptionHandling(
-            ex -> ex.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+        .oauth2ResourceServer(
+            oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
     return http.build();
   }
 }

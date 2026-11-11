@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-23-jwt-login` |
-| Parent | `lesson-21-stateless` |
-| Lesson | 23 — Login API that returns JWT |
-| What changed | `POST /api/auth/login` → HS256 access token via `AuthenticationManager` + `JwtEncoder`; secret from `TAYJAVA_JWT_SECRET` |
+| Branch | `lesson-24-jwt-filter` |
+| Parent | `lesson-23-jwt-login` |
+| Lesson | 24 — JWT authentication filter in the API chain |
+| What changed | `oauth2ResourceServer().jwt()` registers `BearerTokenAuthenticationFilter`; roles+permissions converter; API uses Bearer (no httpBasic) |
 
 ## Demo users
 

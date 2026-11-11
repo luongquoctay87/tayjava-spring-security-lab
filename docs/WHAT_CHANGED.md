@@ -1,6 +1,6 @@
-# lesson-34-multi-tenant
+# lesson-35-domain-object
 
-- **Parent:** `lesson-32-otp-provider`
-- **What changed:** Shared-schema multi-tenant isolation — `app_user.tenant_id`, JWT `tenant_id` claim, `TenantContextFilter`, course mutations reject cross-tenant access; seed `gina.teacher` in `globex`
+- **Parent:** `lesson-34-multi-tenant`
+- **What changed:** Domain-object authorization via custom `PermissionEvaluator` + `hasPermission(#id, 'Course', 'WRITE')` on course update; fail-closed for unknown types
 
 Run: `./mvnw -q test`

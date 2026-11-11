@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-34-multi-tenant` |
-| Parent | `lesson-32-otp-provider` |
-| Lesson | 34 — Multi-tenant user isolation |
-| What changed | `tenant_id` on users/JWT + TenantContext; cross-tenant course mutation denied |
+| Branch | `lesson-35-domain-object` |
+| Parent | `lesson-34-multi-tenant` |
+| Lesson | 35 — Domain object / @PreAuthorize on resource |
+| What changed | `TayJavaPermissionEvaluator` + `hasPermission` for Course WRITE |
 
 ## Demo users
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
- * Lesson 34: courses carry tenant_id; mutating operations require matching TenantContext.
+ * Lesson 35: domain-object authz via hasPermission; tenant isolation retained from lesson 34.
  */
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
   }
 
   @Override
-  @PreAuthorize("hasRole('ADMIN') or @courseSecurity.isOwner(#courseId, authentication)")
+  @PreAuthorize("hasPermission(#courseId, 'Course', 'WRITE')")
   public CourseResp update(Long courseId, String title) {
     CourseRecord existing = requireSameTenant(courseId);
     CourseRecord updated =

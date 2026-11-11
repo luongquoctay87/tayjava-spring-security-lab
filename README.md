@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-12-session` |
-| Parent | `lesson-11-form-login` |
-| Lesson | 12 — session management |
-| What changed | Session fixation changeSessionId + max 1 concurrent session |
+| Branch | `lesson-13-remember-me` |
+| Parent | `lesson-12-session` |
+| Lesson | 13 — remember-me |
+| What changed | Remember-me cookie on web chain (demo key only) |
 
 
 ## Run

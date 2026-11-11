@@ -1,5 +1,7 @@
 package com.tayjava.config.security;
 
+import com.tayjava.service.DemoUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -8,9 +10,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-/** Lesson 10: web/form chain for everything outside /api/** (Order 2). */
+/** Lesson 13: remember-me on the web chain (demo key — never use in production). */
 @Configuration
+@RequiredArgsConstructor
 public class WebSecurityConfig {
+
+  private final DemoUserDetailsService userDetailsService;
 
   @Bean
   @Order(2)
@@ -22,6 +27,12 @@ public class WebSecurityConfig {
                     .anyRequest()
                     .authenticated())
         .formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
+        .rememberMe(
+            remember ->
+                remember
+                    .key("tayjava-lab-remember-me-demo-only")
+                    .userDetailsService(userDetailsService)
+                    .tokenValiditySeconds(86400))
         .sessionManagement(
             sm ->
                 sm.sessionFixation(sf -> sf.changeSessionId())
@@ -36,4 +47,3 @@ public class WebSecurityConfig {
     return new HttpSessionEventPublisher();
   }
 }
-

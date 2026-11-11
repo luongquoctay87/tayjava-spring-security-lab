@@ -1,6 +1,6 @@
-# lesson-12-session
+# lesson-13-remember-me
 
-- **Parent:** `lesson-11-form-login`
-- **What changed:** Session fixation changeSessionId + max 1 concurrent session
+- **Parent:** `lesson-12-session`
+- **What changed:** Remember-me cookie on web chain (demo key only)
 
 Run: `./mvnw -q test`

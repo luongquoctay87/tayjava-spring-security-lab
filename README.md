@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `master` |
-| Lesson | 04 — first Spring Security app on Boot |
-| Parent | — |
-| What changed | Skeleton: Boot 4 + Security starter, `TayJavApplication`, default user in `application.yml`, context-load test |
+| Branch | `demo/lesson-05-filter-chain` |
+| Parent | `master` (side demo) |
+| What changed | Probe servlet filter + `/api/probe` to illustrate traffic through the filter chain; not merged into the Auth API line |
+
 
 ## Run
 

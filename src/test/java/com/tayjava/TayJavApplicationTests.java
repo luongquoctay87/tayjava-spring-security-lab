@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @SpringBootTest
 class TayJavApplicationTests {
@@ -17,6 +17,6 @@ class TayJavApplicationTests {
   void contextLoads() {
     assertThat(applicationContext).isNotNull();
     assertThat(applicationContext.getBean(TayJavApplication.class)).isNotNull();
-    assertThat(applicationContext.getBeanNamesForType(SecurityFilterChain.class)).isNotEmpty();
+    assertThat(applicationContext.getBeanNamesForType(SecurityWebFilterChain.class)).isNotEmpty();
   }
 }

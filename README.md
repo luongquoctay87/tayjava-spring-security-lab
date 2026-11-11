@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-26-auth-entry-point` |
-| Parent | `lesson-25-refresh-token` |
-| Lesson | 26 — Standard 401/403 with AuthenticationEntryPoint |
-| What changed | API `AuthenticationEntryPoint` / `AccessDeniedHandler` return `Resp` envelope; lab `ErrorCode` + `Resp` |
+| Branch | `lesson-28-oauth2-login` |
+| Parent | `lesson-26-auth-entry-point` |
+| Lesson | 28 — OAuth2 Login (Google/GitHub) |
+| What changed | `oauth2Login` on web chain; client id/secret from env (see `.env.example`); link/create `AppUser` on first social login |
 
 ## Demo users
 

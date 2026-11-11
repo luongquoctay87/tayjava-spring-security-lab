@@ -1,3 +1,17 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test-google-client-id
+            client-secret: test-google-client-secret
+            scope: openid, profile, email
+          github:
+            client-id: test-github-client-id
+            client-secret: test-github-client-secret
+            scope: read:user, user:email
+
 tayjava:
   jwt:
     secret: lab-test-secret-must-be-32chars!!
@@ -5,3 +19,17 @@ tayjava:
     audience: tayjava-api
     access-token-ttl: PT15M
     refresh-token-ttl: P14D
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: lab-google-client-id
+            client-secret: lab-google-client-secret
+            scope: openid, profile, email
+          github:
+            client-id: lab-github-client-id
+            client-secret: lab-github-client-secret
+            scope: read:user, user:email

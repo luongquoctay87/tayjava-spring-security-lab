@@ -2,6 +2,7 @@ package com.tayjava.config.security;
 
 import com.tayjava.common.dto.audit.AuditEntry;
 import com.tayjava.common.enums.AuditOutcome;
+import com.tayjava.config.AuditConfig;
 import com.tayjava.service.AuditWriter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class SecurityAuditListener {
     writer.write(
         AuditEntry.of(
             "AUTH_LOGIN",
-            event.getAuthentication().getName(),
+            AuditConfig.sanitizePrincipal(event.getAuthentication().getName()),
             AuditOutcome.SUCCESS,
             null,
             clientIp(),
@@ -35,7 +36,9 @@ public class SecurityAuditListener {
   @EventListener
   public void onFailure(AbstractAuthenticationFailureEvent event) {
     String principal =
-        event.getAuthentication() != null ? event.getAuthentication().getName() : "anonymous";
+        event.getAuthentication() != null
+            ? AuditConfig.sanitizePrincipal(event.getAuthentication().getName())
+            : "anonymous";
     writer.write(
         AuditEntry.of(
             "AUTH_LOGIN",
@@ -50,7 +53,7 @@ public class SecurityAuditListener {
   public void onDenied(AuthorizationDeniedEvent<?> event) {
     String principal =
         event.getAuthentication().get() != null
-            ? event.getAuthentication().get().getName()
+            ? AuditConfig.sanitizePrincipal(event.getAuthentication().get().getName())
             : "anonymous";
     writer.write(
         AuditEntry.of(
@@ -68,7 +71,6 @@ public class SecurityAuditListener {
     if (attrs == null) {
       return null;
     }
-    HttpServletRequest request = attrs.getRequest();
-    return request.getRemoteAddr();
+    return attrs.getRequest().getRemoteAddr();
   }
 }

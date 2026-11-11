@@ -42,11 +42,13 @@ class SecurityAuditTest {
 
   @Test
   void unauthorizedApiStill401AndDoesNotLeakToken() throws Exception {
+    Instant before = Instant.now().minusSeconds(1);
     mockMvc
         .perform(get("/api/enrollments/me").header("Authorization", "Bearer secret-token-value"))
         .andExpect(status().isUnauthorized());
-    List<AuditEvent> recent = auditEventRepository.find(null, Instant.now().minusSeconds(30), null);
+    List<AuditEvent> recent = auditEventRepository.find(null, before, null);
     String blob = recent.toString();
     assertThat(blob).doesNotContain("secret-token-value");
+    assertThat(blob).contains("redacted-principal");
   }
 }

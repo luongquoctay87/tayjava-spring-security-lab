@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -26,6 +27,7 @@ public class AuthenticationProvidersConfig {
   private final MfaPolicy mfaPolicy;
   private final MfaTicketStore mfaTicketStore;
   private final LabOtpService labOtpService;
+  private final AuthenticationEventPublisher authenticationEventPublisher;
 
   @Bean
   @Qualifier("apiAuthenticationManager")
@@ -34,7 +36,10 @@ public class AuthenticationProvidersConfig {
     dao.setPasswordEncoder(passwordEncoder);
     OtpAuthenticationProvider otp =
         new OtpAuthenticationProvider(mfaTicketStore, labOtpService, userDetailsService);
-    return new ProviderManager(
-        List.of(new MfaAwareAuthenticationProvider(dao, mfaPolicy), otp));
+    ProviderManager manager =
+        new ProviderManager(
+            List.of(new MfaAwareAuthenticationProvider(dao, mfaPolicy), otp));
+    manager.setAuthenticationEventPublisher(authenticationEventPublisher);
+    return manager;
   }
 }

@@ -37,6 +37,7 @@ tayjava:
   security:
     login:
       max-failures: 5
+      ip-max-failures: 25
       lock-window: PT15M
   cors:
     allowed-origins: ${TAYJAVA_CORS_ORIGINS:http://localhost:5173}

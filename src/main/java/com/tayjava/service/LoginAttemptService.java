@@ -11,16 +11,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginAttemptService {
 
-  private final int maxFailures;
+  private final int maxUsernameFailures;
+  private final int maxIpFailures;
   private final Duration window;
 
   private final Map<String, Attempt> byUsername = new ConcurrentHashMap<>();
   private final Map<String, Attempt> byIp = new ConcurrentHashMap<>();
 
   public LoginAttemptService(
-      @Value("${tayjava.security.login.max-failures:5}") int maxFailures,
+      @Value("${tayjava.security.login.max-failures:5}") int maxUsernameFailures,
+      @Value("${tayjava.security.login.ip-max-failures:25}") int maxIpFailures,
       @Value("${tayjava.security.login.lock-window:PT15M}") Duration window) {
-    this.maxFailures = maxFailures;
+    this.maxUsernameFailures = maxUsernameFailures;
+    this.maxIpFailures = maxIpFailures;
     this.window = window;
   }
 
@@ -39,11 +42,16 @@ public class LoginAttemptService {
   }
 
   public boolean isUsernameLocked(String username) {
-    return locked(byUsername.get(username.toLowerCase()));
+    return locked(byUsername.get(username.toLowerCase()), maxUsernameFailures);
   }
 
   public boolean isIpLocked(String ip) {
-    return ip != null && locked(byIp.get(ip));
+    return ip != null && locked(byIp.get(ip), maxIpFailures);
+  }
+
+  public void clearAll() {
+    byUsername.clear();
+    byIp.clear();
   }
 
   private void bump(Map<String, Attempt> map, String key) {
@@ -58,7 +66,7 @@ public class LoginAttemptService {
         });
   }
 
-  private boolean locked(Attempt attempt) {
+  private boolean locked(Attempt attempt, int maxFailures) {
     if (attempt == null) {
       return false;
     }

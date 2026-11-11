@@ -1,72 +1,35 @@
-# TayJava Spring Security Lab
+# Demo: Spring Authorization Server (lesson 30)
 
-Sample Spring Boot + Spring Security application that grows with the **TayJava Spring Security** article series.
-
-Readers build one continuous app while learning Spring Security 7 on Boot 4: from the first secured app, through form login / session / CSRF, RBAC, JWT APIs, and a production checklist. Each lesson that changes the code has a matching **git branch**.
-
-This repository is a companion for learning — not the TayJava production backend.
-
-## What you will build
-
-- Layered monolith under package `com.tayjava` (`controller` / `service` / `entity` / `common` / `config.security`)
-- AuthN/Z around Course APIs and admin surfaces (`STUDENT` / `INSTRUCTOR` / `ADMIN`)
-- Form login + session, then stateless JWT (`/api/auth/login`, refresh), later OAuth2 / Resource Server lessons
-- Centralized errors (`ErrorException` / `Resp`) aligned with `e-learning`
-
-## Tech stack
-
-| Area | Choice |
-|------|--------|
-| Language | Java 21 |
-| Framework | Spring Boot 4.0.9 + Spring Security 7.x |
-| Web | Spring MVC (`spring-boot-starter-webmvc`) |
-| Security | `spring-boot-starter-security` + `spring-security-test` |
-| Build | Maven Wrapper (`./mvnw`) |
-| Persistence (later) | Spring Data JPA, PostgreSQL, Flyway |
-| Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
-
-## Project coordinates
+**Kind:** `demo` (side branch — do **not** merge into the Auth API project line)
 
 | | |
 |---|---|
-| Group / artifact | `com.tayjava` / `tayjava-spring-security-lab` |
-| Main class | `com.tayjava.TayJavApplication` |
-| Default branch | `master` — lesson 04 skeleton |
-| Port | `8080` |
-| Demo user (master) | `an.student` / `demo1234` |
-| License | MIT |
-| Branch map | `blogs/java/spring-security/lab-samples-map.md` (TayJava blogs workspace) |
+| Branch | `demo/lesson-30-authorization-server` |
+| Parent | `master` |
+| Package | `com.tayjava.demo` |
+| Entry | `com.tayjava.TayJavApplication` |
+| Port | `9000` |
 
-## This branch
+## What changed
 
-| | |
-|---|---|
-| Branch | `master` |
-| Lesson | 04 — first Spring Security app on Boot |
-| Parent | — |
-| What changed | Skeleton: Boot 4 + Security starter, `TayJavApplication`, default user in `application.yml`, context-load test |
+Standalone Authorization Server (SAS 2.x / Boot 4) for OAuth2/OIDC exercises:
 
-## Run
+- `AuthorizationServerConfig` — protocol chain + form-login chain
+- `RegisteredClientConfig` — `tayjava-web` (PKCE), `tayjava-mobile` (public), `tayjava-partner-sync` (client_credentials)
+- `JwkConfig` — lab ephemeral RSA (`kid=tayjava-lab-demo`) + issuer `http://localhost:9000`
+- `DemoUserConfig` — `an.student` / `bao.teacher` (`demo1234`)
+- Gate tests: OpenID discovery, client_credentials happy path + wrong secret `401`
 
-```bash
-./mvnw spring-boot:run
-# default form login with an.student / demo1234
-```
-
-## Test
+## Run / test
 
 ```bash
 ./mvnw -q test
+./mvnw spring-boot:run
+
+curl -s http://localhost:9000/.well-known/openid-configuration | head
+curl -s -u tayjava-partner-sync:lab-partner-secret \
+  -d grant_type=client_credentials -d scope=enrollments.read \
+  http://localhost:9000/oauth2/token
 ```
 
-## Lesson → branch (project line)
-
-See the full Parent→Branch map in `blogs/java/spring-security/lab-samples-map.md`. Highlights:
-
-| Lesson | Branch |
-|--------|--------|
-| 04 | `master` |
-| 06 | `lesson-06-security-filter-chain` |
-| 20 | `lesson-20-rbac` |
-| 26 | `lesson-26-auth-entry-point` |
-| 42 | `lesson-42-capstone` |
+Lab secrets default to `lab-web-secret` / `lab-partner-secret` (override with `TAYJAVA_WEB_CLIENT_SECRET` / `TAYJAVA_PARTNER_CLIENT_SECRET`). Ephemeral JWK is for local learning only — production loads a stable keystore.

@@ -1,14 +1,15 @@
 spring:
   application:
     name: tayjava-spring-security-lab
-  # Lesson 04 demo user — replaced by UserDetailsService / DB users in later lessons.
-  security:
-    user:
-      name: an.student
-      password: demo1234
 
 server:
-  port: 8080
+  port: 9000
+
+# Lab defaults — override via env for anything beyond local exercises.
+tayjava:
+  oauth:
+    web-client-secret: ${TAYJAVA_WEB_CLIENT_SECRET:lab-web-secret}
+    partner-client-secret: ${TAYJAVA_PARTNER_CLIENT_SECRET:lab-partner-secret}
 
 logging:
   level:

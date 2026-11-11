@@ -41,18 +41,18 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-16-authorize-http` |
-| Parent | `lesson-15-csrf` |
-| Lesson | 16 — URL authorization with `authorizeHttpRequests` |
-| What changed | Tighten API/web matchers (ordered public → privileged → authenticated); add PUT/DELETE courses, enrollments/me, admin area, auth stubs |
+| Branch | `lesson-17-role-authority` |
+| Parent | `lesson-16-authorize-http` |
+| Lesson | 17 — Role vs Authority / GrantedAuthority |
+| What changed | `Authorities` helpers; UserDetailsService emits ROLE_* + permissions; API action rules use `hasAuthority`; report endpoint |
 
 ## Demo users
 
-| Username | Password | Roles |
-|----------|----------|-------|
-| `an.student` | `demo1234` | `STUDENT` |
-| `bao.teacher` | `demo1234` | `INSTRUCTOR` |
-| `root.admin` | `demo1234` | `ADMIN` |
+| Username | Password | Role + sample authorities |
+|----------|----------|---------------------------|
+| `an.student` | `demo1234` | `ROLE_STUDENT`, `course:read`, `enrollment:*` |
+| `bao.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, `course:create`, `course:update:own`, `report:view` |
+| `root.admin` | `demo1234` | `ROLE_ADMIN` + all permissions incl. `course:delete` |
 
 ## Run
 

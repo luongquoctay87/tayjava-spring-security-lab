@@ -1,6 +1,5 @@
 package com.tayjava.config.security;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,21 +22,15 @@ class SecurityFilterChainTest {
   }
 
   @Test
-  void postCoursesRequiresInstructorOrAdmin() throws Exception {
+  void postCoursesRequiresCourseCreateAuthority() throws Exception {
     mockMvc.perform(post("/api/courses")).andExpect(status().isUnauthorized());
-    mockMvc
-        .perform(post("/api/courses").with(user("an.student").roles("STUDENT")))
-        .andExpect(status().isForbidden());
-    mockMvc
-        .perform(post("/api/courses").with(user("bao.teacher").roles("INSTRUCTOR")))
-        .andExpect(status().isCreated());
+    mockMvc.perform(post("/api/courses").with(TestAuthorities.student())).andExpect(status().isForbidden());
+    mockMvc.perform(post("/api/courses").with(TestAuthorities.instructor())).andExpect(status().isCreated());
   }
 
   @Test
   void enrollmentsRequireAuthentication() throws Exception {
     mockMvc.perform(get("/api/enrollments/me")).andExpect(status().isUnauthorized());
-    mockMvc
-        .perform(get("/api/enrollments/me").with(user("an.student").roles("STUDENT")))
-        .andExpect(status().isOk());
+    mockMvc.perform(get("/api/enrollments/me").with(TestAuthorities.student())).andExpect(status().isOk());
   }
 }

@@ -1,6 +1,6 @@
-# lesson-16-authorize-http
+# lesson-17-role-authority
 
-- **Parent:** `lesson-15-csrf`
-- **What changed:** Tighten `authorizeHttpRequests` matchers (API matrix + `/admin/**`); add course PUT/DELETE, enrollments/me, admin dashboard, auth stubs
+- **Parent:** `lesson-16-authorize-http`
+- **What changed:** Role vs authority clarity — `Authorities` constants, permission-aware `DemoUserDetailsService`, API rules via `hasAuthority`
 
 Run: `./mvnw -q test`

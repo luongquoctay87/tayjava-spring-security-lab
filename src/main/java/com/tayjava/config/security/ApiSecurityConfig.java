@@ -1,5 +1,7 @@
 package com.tayjava.config.security;
 
+import static com.tayjava.config.security.Authorities.Perm;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -10,10 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson 16: ordered {@code authorizeHttpRequests} matchers for the API matrix.
- *
- * <p>Order matters: public GETs and auth endpoints first, then narrow privileged
- * mutations, then authenticated groups, then {@code anyRequest()}.
+ * Lesson 17: action rules use {@code hasAuthority(permission)}; area rules keep {@code hasRole}.
  */
 @Configuration
 public class ApiSecurityConfig {
@@ -29,12 +28,16 @@ public class ApiSecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/api/courses", "/api/courses/*")
                     .permitAll()
                     .requestMatchers(HttpMethod.DELETE, "/api/courses/*")
-                    .hasRole("ADMIN")
+                    .hasAuthority(Perm.COURSE_DELETE)
                     .requestMatchers(HttpMethod.POST, "/api/courses")
-                    .hasAnyRole("INSTRUCTOR", "ADMIN")
+                    .hasAuthority(Perm.COURSE_CREATE)
                     .requestMatchers(HttpMethod.PUT, "/api/courses/*")
-                    .hasAnyRole("INSTRUCTOR", "ADMIN")
-                    .requestMatchers("/api/enrollments/**", "/api/me")
+                    .hasAuthority(Perm.COURSE_UPDATE_OWN)
+                    .requestMatchers(HttpMethod.GET, "/api/enrollments/me")
+                    .hasAuthority(Perm.ENROLLMENT_READ_OWN)
+                    .requestMatchers(HttpMethod.GET, "/api/reports/**")
+                    .hasAuthority(Perm.REPORT_VIEW)
+                    .requestMatchers("/api/me")
                     .authenticated()
                     .anyRequest()
                     .authenticated())

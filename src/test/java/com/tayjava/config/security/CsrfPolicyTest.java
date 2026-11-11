@@ -1,7 +1,6 @@
 package com.tayjava.config.security;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,7 +20,7 @@ class CsrfPolicyTest {
   @Test
   void apiPostDoesNotRequireCsrf() throws Exception {
     mockMvc
-        .perform(post("/api/courses").with(user("bao.teacher").roles("INSTRUCTOR")))
+        .perform(post("/api/courses").with(TestAuthorities.instructor()))
         .andExpect(status().isCreated());
   }
 

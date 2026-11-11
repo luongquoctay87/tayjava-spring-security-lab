@@ -1,6 +1,6 @@
-# lesson-06-security-filter-chain
+# lesson-07-security-context
 
-- **Parent:** `master`
-- **What changed:** Single `SecurityFilterChain` (lambda DSL), demo users, Course API stubs, security MockMvc tests.
+- **Parent:** `lesson-06-security-filter-chain`
+- **What changed:** GET /api/me returns Authentication from SecurityContextHolder
 
 Run: `./mvnw -q test`

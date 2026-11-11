@@ -1,6 +1,6 @@
-# lesson-37-brute-force
+# lesson-39-mockmvc-security
 
-- **Parent:** `lesson-36-cors-headers`
-- **What changed:** Login soft-lock via `LoginAttemptService` + auth events; `LoginRateLimitFilter` returns 429 when IP budget exhausted
+- **Parent:** `lesson-37-brute-force`
+- **What changed:** Role×endpoint parameterized MockMvc matrix + `@WithMockUser` examples for happy/401/403 paths
 
 Run: `./mvnw -q test`

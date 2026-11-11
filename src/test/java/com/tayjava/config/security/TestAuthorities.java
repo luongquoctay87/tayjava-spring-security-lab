@@ -10,11 +10,11 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
  * Builds MockMvc users with the same ROLE_* + permission mix as {@code DemoUserDetailsService}.
  * Prefer this over {@code .roles(...)} once rules use {@code hasAuthority}.
  */
-final class TestAuthorities {
+public final class TestAuthorities {
 
   private TestAuthorities() {}
 
-  static UserRequestPostProcessor student() {
+  public static UserRequestPostProcessor student() {
     return org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
         .user("an.student")
         .authorities(
@@ -24,11 +24,11 @@ final class TestAuthorities {
             auth(Perm.ENROLLMENT_READ_OWN));
   }
 
-  static UserRequestPostProcessor instructor() {
+  public static UserRequestPostProcessor instructor() {
     return instructor("bao.teacher");
   }
 
-  static UserRequestPostProcessor instructor(String username) {
+  public static UserRequestPostProcessor instructor(String username) {
     return org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
         .user(username)
         .authorities(
@@ -40,7 +40,7 @@ final class TestAuthorities {
             auth(Perm.REPORT_VIEW));
   }
 
-  static UserRequestPostProcessor admin() {
+  public static UserRequestPostProcessor admin() {
     return org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
         .user("root.admin")
         .authorities(

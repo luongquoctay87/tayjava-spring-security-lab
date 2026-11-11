@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-37-brute-force` |
-| Parent | `lesson-36-cors-headers` |
-| Lesson | 37 — Brute-force / rate limit login |
-| What changed | Soft-lock login by username/IP + rate-limit filter on /api/auth/login |
+| Branch | `lesson-39-mockmvc-security` |
+| Parent | `lesson-37-brute-force` |
+| Lesson | 39 — @WithMockUser / MockMvc security |
+| What changed | Parameterized role×endpoint MockMvc matrix and @WithMockUser coverage |
 
 ## Demo users
 

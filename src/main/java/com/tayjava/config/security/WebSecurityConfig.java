@@ -13,7 +13,7 @@ public class WebSecurityConfig {
 
   @Bean
   @Order(2)
-  SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
+  SecurityFilterChain webSecurityFilterChain(HttpSecurity http) {
     http.authorizeHttpRequests(
             auth ->
                 auth.requestMatchers("/css/**", "/js/**", "/login", "/error")

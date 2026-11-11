@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-25-refresh-token` |
-| Parent | `lesson-24-jwt-filter` |
-| Lesson | 25 — Refresh tokens and revocation |
-| What changed | Login returns access+refresh; `POST /api/auth/refresh` rotates with replay→family revoke; `POST /api/auth/logout`; `ddl/003_refresh_token.sql` |
+| Branch | `lesson-26-auth-entry-point` |
+| Parent | `lesson-25-refresh-token` |
+| Lesson | 26 — Standard 401/403 with AuthenticationEntryPoint |
+| What changed | API `AuthenticationEntryPoint` / `AccessDeniedHandler` return `Resp` envelope; lab `ErrorCode` + `Resp` |
 
 ## Demo users
 

@@ -13,8 +13,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * API chain: STATELESS Bearer JWT. Auth login/refresh/logout are permitAll; protected routes use
- * {@code oauth2ResourceServer().jwt()}.
+ * Lesson 26: API chain with Bearer JWT plus {@link ApiAuthenticationEntryPoint} /
+ * {@link ApiAccessDeniedHandler} writing the {@code Resp} envelope for 401/403.
  */
 @Configuration
 @RequiredArgsConstructor
@@ -22,6 +22,8 @@ public class ApiSecurityConfig {
 
   private final EnrolledCourseAuthorizationManager enrolledCourseAuthorizationManager;
   private final JwtAuthenticationConverter jwtAuthenticationConverter;
+  private final ApiAuthenticationEntryPoint apiAuthenticationEntryPoint;
+  private final ApiAccessDeniedHandler apiAccessDeniedHandler;
 
   @Bean
   @Order(1)
@@ -29,7 +31,8 @@ public class ApiSecurityConfig {
     http.securityMatcher("/api/**")
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/refresh", "/api/auth/logout")
+                auth.requestMatchers(
+                        HttpMethod.POST, "/api/auth/login", "/api/auth/refresh", "/api/auth/logout")
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/courses", "/api/courses/*")
                     .permitAll()
@@ -52,8 +55,16 @@ public class ApiSecurityConfig {
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .requestCache(cache -> cache.disable())
         .csrf(csrf -> csrf.disable())
+        .exceptionHandling(
+            ex ->
+                ex.authenticationEntryPoint(apiAuthenticationEntryPoint)
+                    .accessDeniedHandler(apiAccessDeniedHandler))
         .oauth2ResourceServer(
-            oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+            oauth2 ->
+                oauth2
+                    .authenticationEntryPoint(apiAuthenticationEntryPoint)
+                    .accessDeniedHandler(apiAccessDeniedHandler)
+                    .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
     return http.build();
   }
 }

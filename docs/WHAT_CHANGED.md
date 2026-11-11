@@ -1,6 +1,6 @@
-# lesson-25-refresh-token
+# lesson-26-auth-entry-point
 
-- **Parent:** `lesson-24-jwt-filter`
-- **What changed:** Access + refresh pair on login; `POST /api/auth/refresh` with rotation + family revoke on replay; `POST /api/auth/logout`; `RefreshToken` entity + `ddl/003_refresh_token.sql`
+- **Parent:** `lesson-25-refresh-token`
+- **What changed:** `ApiAuthenticationEntryPoint` / `ApiAccessDeniedHandler` write `Resp` JSON for 401/403 on `/api/**`; introduce lab `Resp` + `ErrorCode`
 
 Run: `./mvnw -q test`

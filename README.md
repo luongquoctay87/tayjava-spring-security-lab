@@ -41,17 +41,23 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-15-csrf` |
-| Parent | `lesson-14-logout` |
-| Lesson | 15 — CSRF |
-| What changed | Document API CSRF off (stateless); web form CSRF on — verified by tests |
+| Branch | `lesson-16-authorize-http` |
+| Parent | `lesson-15-csrf` |
+| Lesson | 16 — URL authorization with `authorizeHttpRequests` |
+| What changed | Tighten API/web matchers (ordered public → privileged → authenticated); add PUT/DELETE courses, enrollments/me, admin area, auth stubs |
 
+## Demo users
+
+| Username | Password | Roles |
+|----------|----------|-------|
+| `an.student` | `demo1234` | `STUDENT` |
+| `bao.teacher` | `demo1234` | `INSTRUCTOR` |
+| `root.admin` | `demo1234` | `ADMIN` |
 
 ## Run
 
 ```bash
 ./mvnw spring-boot:run
-# default form login with an.student / demo1234
 ```
 
 ## Test
@@ -68,6 +74,7 @@ See the full Parent→Branch map in `blogs/java/spring-security/lab-samples-map.
 |--------|--------|
 | 04 | `master` |
 | 06 | `lesson-06-security-filter-chain` |
+| 16 | `lesson-16-authorize-http` |
 | 20 | `lesson-20-rbac` |
 | 26 | `lesson-26-auth-entry-point` |
 | 42 | `lesson-42-capstone` |

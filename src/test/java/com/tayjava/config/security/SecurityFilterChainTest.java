@@ -38,6 +38,6 @@ class SecurityFilterChainTest {
     mockMvc.perform(get("/api/enrollments/me")).andExpect(status().isUnauthorized());
     mockMvc
         .perform(get("/api/enrollments/me").with(user("an.student").roles("STUDENT")))
-        .andExpect(status().isNotFound());
+        .andExpect(status().isOk());
   }
 }

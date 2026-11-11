@@ -1,6 +1,6 @@
-# lesson-15-csrf
+# lesson-16-authorize-http
 
-- **Parent:** `lesson-14-logout`
-- **What changed:** Document API CSRF off (stateless); web form CSRF on — verified by tests
+- **Parent:** `lesson-15-csrf`
+- **What changed:** Tighten `authorizeHttpRequests` matchers (API matrix + `/admin/**`); add course PUT/DELETE, enrollments/me, admin dashboard, auth stubs
 
 Run: `./mvnw -q test`

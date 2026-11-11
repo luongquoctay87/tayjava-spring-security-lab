@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-40-jwt-oauth-test` |
-| Parent | `lesson-39-mockmvc-security` |
-| Lesson | 40 — Test JWT + OAuth2 flows |
-| What changed | JWT decode + jwt()/oauth2Login() MockMvc tests without external IdP secrets |
+| Branch | `lesson-41-audit` |
+| Parent | `lesson-40-jwt-oauth-test` |
+| Lesson | 41 — Audit / security events |
+| What changed | Structured security audit events via listener + AuditWriter (no secret leakage) |
 
 ## Demo users
 

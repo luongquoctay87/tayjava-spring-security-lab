@@ -7,6 +7,7 @@
 | `003_refresh_token.sql` | `refresh_token` table (hash, family, revoke columns) |
 | `004_mfa_notes.sql` | MFA column sketch (lab uses in-memory tickets + fixed lab OTP) |
 | `005_tenant.sql` | `app_user.tenant_id` shared-schema isolation |
+| `006_audit.sql` | `security_audit_log` append-only sketch |
 
 ## Lab runtime
 

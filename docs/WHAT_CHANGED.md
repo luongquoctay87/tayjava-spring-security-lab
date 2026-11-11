@@ -1,6 +1,6 @@
-# lesson-40-jwt-oauth-test
+# lesson-41-audit
 
-- **Parent:** `lesson-39-mockmvc-security`
-- **What changed:** Dedicated JWT + OAuth2 MockMvc flow tests using `jwt()` / `oauth2Login()` post-processors — no real Google/GitHub secrets
+- **Parent:** `lesson-40-jwt-oauth-test`
+- **What changed:** Security audit listener + `AuditWriter` + in-memory `AuditEventRepository`; actuator exposure limited; DDL sketch for append-only audit table
 
 Run: `./mvnw -q test`

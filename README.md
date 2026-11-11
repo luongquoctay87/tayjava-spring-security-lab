@@ -41,10 +41,11 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `master` |
-| Lesson | 04 — first Spring Security app on Boot |
-| Parent | — |
-| What changed | Skeleton: Boot 4 + Security starter, `TayJavApplication`, default user in `application.yml`, context-load test |
+| Branch | `lesson-06-security-filter-chain` |
+| Parent | `master` |
+| Lesson | 06 — SecurityFilterChain lambda DSL |
+| What changed | `config/security/SecurityConfig` with one chain; in-memory demo users; stub `GET/POST /api/courses`; MockMvc security tests |
+
 
 ## Run
 

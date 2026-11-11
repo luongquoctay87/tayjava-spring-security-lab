@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-14-logout` |
-| Parent | `lesson-13-remember-me` |
-| Lesson | 14 — logout |
-| What changed | Logout clears session + remember-me cookie; login shows logout banner |
+| Branch | `lesson-15-csrf` |
+| Parent | `lesson-14-logout` |
+| Lesson | 15 — CSRF |
+| What changed | Document API CSRF off (stateless); web form CSRF on — verified by tests |
 
 
 ## Run

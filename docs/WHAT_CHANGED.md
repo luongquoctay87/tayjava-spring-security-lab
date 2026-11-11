@@ -1,6 +1,6 @@
-# lesson-14-logout
+# lesson-15-csrf
 
-- **Parent:** `lesson-13-remember-me`
-- **What changed:** Logout clears session + remember-me cookie; login shows logout banner
+- **Parent:** `lesson-14-logout`
+- **What changed:** Document API CSRF off (stateless); web form CSRF on — verified by tests
 
 Run: `./mvnw -q test`

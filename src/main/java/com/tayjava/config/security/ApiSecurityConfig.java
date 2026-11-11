@@ -29,7 +29,9 @@ public class ApiSecurityConfig {
                     .authenticated()
                     .anyRequest()
                     .authenticated())
-        .csrf(csrf -> csrf.disable())
+        .csrf(
+            csrf ->
+                csrf.disable()) // Stateless API: no browser cookie session — CSRF N/A (lesson 15)
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .httpBasic(Customizer.withDefaults());
     return http.build();

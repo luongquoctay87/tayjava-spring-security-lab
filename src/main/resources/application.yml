@@ -22,12 +22,12 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID:changeme-google-client-id}
-            client-secret: ${GOOGLE_CLIENT_SECRET:changeme-google-client-secret}
+            client-id: ${GOOGLE_CLIENT_ID:lab-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:lab-google-client-secret}
             scope: openid, profile, email
           github:
-            client-id: ${GITHUB_CLIENT_ID:changeme-github-client-id}
-            client-secret: ${GITHUB_CLIENT_SECRET:changeme-github-client-secret}
+            client-id: ${GITHUB_CLIENT_ID:lab-github-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:lab-github-client-secret}
             scope: read:user, user:email
 
 server:

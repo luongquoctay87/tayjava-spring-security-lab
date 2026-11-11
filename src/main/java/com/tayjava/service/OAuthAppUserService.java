@@ -1,7 +1,6 @@
 package com.tayjava.service;
 
-import static com.tayjava.config.security.Authorities.Role;
-
+import com.tayjava.config.security.Authorities;
 import com.tayjava.entity.AppUser;
 import com.tayjava.entity.Role;
 import com.tayjava.repository.AppUserRepository;
@@ -44,7 +43,7 @@ public class OAuthAppUserService {
   private AppUser createStudent(String email, String preferredUsername, String registrationId) {
     Role student =
         roles
-            .findByName(Role.STUDENT)
+            .findByName(Authorities.Role.STUDENT)
             .orElseThrow(() -> new IllegalStateException("STUDENT role missing — seed RBAC first"));
     String base =
         StringUtils.hasText(preferredUsername)

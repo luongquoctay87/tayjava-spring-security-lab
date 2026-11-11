@@ -20,7 +20,7 @@ This repository is a companion for learning — not the TayJava production backe
 | Language | Java 21 |
 | Framework | Spring Boot 4.0.9 + Spring Security 7.x |
 | Web | Spring MVC (`spring-boot-starter-webmvc`) |
-| Security | `spring-boot-starter-security` + `spring-boot-starter-security-oauth2-resource-server` + `spring-security-test` |
+| Security | `spring-boot-starter-security` + oauth2 resource-server/client + `spring-security-test` |
 | Build | Maven Wrapper (`./mvnw`) |
 | Persistence | Spring Data JPA + H2 (lab); `ddl/` for PostgreSQL reference |
 | Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
@@ -68,7 +68,9 @@ curl -s -X POST http://localhost:8080/api/auth/login \
 # Then: POST /api/auth/refresh with {"refreshToken":"..."} ; POST /api/auth/logout to revoke
 ```
 
-See `.env.example` for the env var name. Never commit a real secret.
+See `.env.example` for JWT and OAuth client env vars. Never commit a real secret.
+
+OAuth2 login (web): set `GOOGLE_CLIENT_*` / `GITHUB_CLIENT_*`, then open `/login` or `/oauth2/authorization/google`.
 
 ## DDL
 

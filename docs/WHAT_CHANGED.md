@@ -1,6 +1,6 @@
-# lesson-17-role-authority
+# lesson-18-method-security
 
-- **Parent:** `lesson-16-authorize-http`
-- **What changed:** Role vs authority clarity — `Authorities` constants, permission-aware `DemoUserDetailsService`, API rules via `hasAuthority`
+- **Parent:** `lesson-17-role-authority`
+- **What changed:** `@EnableMethodSecurity` + `@PreAuthorize` on `CourseServiceImpl`; ownership via `@courseSecurity`
 
 Run: `./mvnw -q test`

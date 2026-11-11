@@ -15,8 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Lesson 17: emit both {@code ROLE_*} (for {@code hasRole}) and fine permissions (for {@code
- * hasAuthority}).
+ * Lesson 17/18: emit both {@code ROLE_*} and fine permissions; {@code chi.teacher} supports
+ * ownership demos in method security.
  */
 @Service
 public class DemoUserDetailsService implements UserDetailsService {
@@ -38,12 +38,14 @@ public class DemoUserDetailsService implements UserDetailsService {
             "bao.teacher",
             hash,
             Role.INSTRUCTOR,
-            List.of(
-                Perm.COURSE_READ,
-                Perm.COURSE_CREATE,
-                Perm.COURSE_UPDATE_OWN,
-                Perm.ENROLLMENT_READ_OWN,
-                Perm.REPORT_VIEW)));
+            instructorPerms()));
+    users.put(
+        "chi.teacher",
+        user(
+            "chi.teacher",
+            hash,
+            Role.INSTRUCTOR,
+            instructorPerms()));
     users.put(
         "root.admin",
         user(
@@ -60,6 +62,15 @@ public class DemoUserDetailsService implements UserDetailsService {
                 Perm.ENROLLMENT_READ_OWN,
                 Perm.USER_MANAGE,
                 Perm.REPORT_VIEW)));
+  }
+
+  private static List<String> instructorPerms() {
+    return List.of(
+        Perm.COURSE_READ,
+        Perm.COURSE_CREATE,
+        Perm.COURSE_UPDATE_OWN,
+        Perm.ENROLLMENT_READ_OWN,
+        Perm.REPORT_VIEW);
   }
 
   private static UserDetails user(

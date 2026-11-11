@@ -41,17 +41,18 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-17-role-authority` |
-| Parent | `lesson-16-authorize-http` |
-| Lesson | 17 — Role vs Authority / GrantedAuthority |
-| What changed | `Authorities` helpers; UserDetailsService emits ROLE_* + permissions; API action rules use `hasAuthority`; report endpoint |
+| Branch | `lesson-18-method-security` |
+| Parent | `lesson-17-role-authority` |
+| Lesson | 18 — Method security with `@PreAuthorize` |
+| What changed | `@EnableMethodSecurity`; `CourseService` + ownership `@PreAuthorize`; `CourseSecurity` SpEL bean; `chi.teacher` for ownership demos |
 
 ## Demo users
 
 | Username | Password | Role + sample authorities |
 |----------|----------|---------------------------|
 | `an.student` | `demo1234` | `ROLE_STUDENT`, `course:read`, `enrollment:*` |
-| `bao.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, `course:create`, `course:update:own`, `report:view` |
+| `bao.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, owns course `1` |
+| `chi.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, owns course `2` (ownership demos) |
 | `root.admin` | `demo1234` | `ROLE_ADMIN` + all permissions incl. `course:delete` |
 
 ## Run

@@ -25,8 +25,12 @@ final class TestAuthorities {
   }
 
   static UserRequestPostProcessor instructor() {
+    return instructor("bao.teacher");
+  }
+
+  static UserRequestPostProcessor instructor(String username) {
     return org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
-        .user("bao.teacher")
+        .user(username)
         .authorities(
             auth("ROLE_" + Role.INSTRUCTOR),
             auth(Perm.COURSE_READ),

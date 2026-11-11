@@ -12,13 +12,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 /**
- * Web chain with form login / remember-me; {@code /admin/**} locked to ADMIN.
+ * Lesson 28: web chain with form login + {@code oauth2Login} (Google/GitHub). API JWT chain stays
+ * separate and stateless.
  */
 @Configuration
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
   private final UserDetailsService userDetailsService;
+  private final LinkingOAuth2UserService linkingOAuth2UserService;
+  private final LinkingOidcUserService linkingOidcUserService;
 
   @Bean
   @Order(2)
@@ -29,13 +32,23 @@ public class WebSecurityConfig {
                     .permitAll()
                     .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico")
                     .permitAll()
-                    .requestMatchers("/login", "/error")
+                    .requestMatchers("/login", "/error", "/oauth2/**", "/login/oauth2/**")
                     .permitAll()
                     .requestMatchers("/admin/**")
                     .hasRole("ADMIN")
                     .anyRequest()
                     .authenticated())
         .formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
+        .oauth2Login(
+            oauth2 ->
+                oauth2
+                    .loginPage("/login")
+                    .userInfoEndpoint(
+                        userInfo ->
+                            userInfo
+                                .userService(linkingOAuth2UserService)
+                                .oidcUserService(linkingOidcUserService))
+                    .defaultSuccessUrl("/", true))
         .rememberMe(
             remember ->
                 remember

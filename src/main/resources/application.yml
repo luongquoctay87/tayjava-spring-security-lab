@@ -1,7 +1,6 @@
 spring:
   application:
     name: tayjava-spring-security-lab
-  # Lesson 04 demo user — replaced by UserDetailsService / DB users in later lessons.
   security:
     user:
       name: an.student
@@ -9,6 +8,11 @@ spring:
 
 server:
   port: 8080
+
+# Real value from env TAYJAVA_JWT_SECRET — never commit a production secret.
+tayjava:
+  jwt:
+    secret: ${TAYJAVA_JWT_SECRET}
 
 logging:
   level:

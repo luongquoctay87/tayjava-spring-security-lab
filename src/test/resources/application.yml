@@ -1,0 +1,4 @@
+# Lab-only test secret (≥ 256 bits). Override with TAYJAVA_JWT_SECRET when running the app.
+tayjava:
+  jwt:
+    secret: tayjava-lab-demo-secret-32bytes!!

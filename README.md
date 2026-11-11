@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-18-method-security` |
-| Parent | `lesson-17-role-authority` |
-| Lesson | 18 — Method security with `@PreAuthorize` |
-| What changed | `@EnableMethodSecurity`; `CourseService` + ownership `@PreAuthorize`; `CourseSecurity` SpEL bean; `chi.teacher` for ownership demos |
+| Branch | `lesson-19-authorization-manager` |
+| Parent | `lesson-18-method-security` |
+| Lesson | 19 — Custom `AuthorizationManager` |
+| What changed | `EnrolledCourseAuthorizationManager` for `GET /api/courses/{courseId}/lectures`; in-memory enrollment access |
 
 ## Demo users
 

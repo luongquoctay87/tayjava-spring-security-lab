@@ -2,6 +2,7 @@ package com.tayjava.config.security;
 
 import static com.tayjava.config.security.Authorities.Perm;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -12,10 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson 17: action rules use {@code hasAuthority(permission)}; area rules keep {@code hasRole}.
+ * Lesson 19: wire custom {@link EnrolledCourseAuthorizationManager} for lecture access.
  */
 @Configuration
+@RequiredArgsConstructor
 public class ApiSecurityConfig {
+
+  private final EnrolledCourseAuthorizationManager enrolledCourseAuthorizationManager;
 
   @Bean
   @Order(1)
@@ -27,6 +31,8 @@ public class ApiSecurityConfig {
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/courses", "/api/courses/*")
                     .permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/courses/{courseId}/lectures")
+                    .access(enrolledCourseAuthorizationManager)
                     .requestMatchers(HttpMethod.DELETE, "/api/courses/*")
                     .hasAuthority(Perm.COURSE_DELETE)
                     .requestMatchers(HttpMethod.POST, "/api/courses")

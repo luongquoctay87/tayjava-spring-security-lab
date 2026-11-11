@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-11-form-login` |
-| Parent | `lesson-10-multiple-chains` |
-| Lesson | 11 — form login |
-| What changed | Custom Thymeleaf /login page wired into WebSecurityConfig |
+| Branch | `lesson-12-session` |
+| Parent | `lesson-11-form-login` |
+| Lesson | 12 — session management |
+| What changed | Session fixation changeSessionId + max 1 concurrent session |
 
 
 ## Run

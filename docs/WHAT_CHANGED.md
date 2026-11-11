@@ -1,6 +1,6 @@
-# lesson-11-form-login
+# lesson-12-session
 
-- **Parent:** `lesson-10-multiple-chains`
-- **What changed:** Custom Thymeleaf /login page wired into WebSecurityConfig
+- **Parent:** `lesson-11-form-login`
+- **What changed:** Session fixation changeSessionId + max 1 concurrent session
 
 Run: `./mvnw -q test`

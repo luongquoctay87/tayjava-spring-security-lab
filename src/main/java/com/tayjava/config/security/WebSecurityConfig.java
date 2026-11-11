@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 /** Lesson 10: web/form chain for everything outside /api/** (Order 2). */
 @Configuration
@@ -21,7 +22,18 @@ public class WebSecurityConfig {
                     .anyRequest()
                     .authenticated())
         .formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/", true))
+        .sessionManagement(
+            sm ->
+                sm.sessionFixation(sf -> sf.changeSessionId())
+                    .maximumSessions(1)
+                    .maxSessionsPreventsLogin(false))
         .logout(Customizer.withDefaults());
     return http.build();
   }
+
+  @Bean
+  HttpSessionEventPublisher httpSessionEventPublisher() {
+    return new HttpSessionEventPublisher();
+  }
 }
+

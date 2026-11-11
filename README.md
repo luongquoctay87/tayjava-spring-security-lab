@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-35-domain-object` |
-| Parent | `lesson-34-multi-tenant` |
-| Lesson | 35 — Domain object / @PreAuthorize on resource |
-| What changed | `TayJavaPermissionEvaluator` + `hasPermission` for Course WRITE |
+| Branch | `lesson-36-cors-headers` |
+| Parent | `lesson-35-domain-object` |
+| Lesson | 36 — CORS + security headers |
+| What changed | CORS bean + CSP/frame security headers on both filter chains |
 
 ## Demo users
 

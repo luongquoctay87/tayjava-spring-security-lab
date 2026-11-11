@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -60,6 +62,17 @@ public class ApiSecurityConfig {
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .requestCache(cache -> cache.disable())
         .csrf(csrf -> csrf.disable())
+        .cors(withDefaults())
+        .headers(
+            headers ->
+                headers
+                    .contentSecurityPolicy(csp -> csp.policyDirectives("default-src 'self'"))
+                    .frameOptions(frame -> frame.sameOrigin())
+                    .referrerPolicy(
+                        ref ->
+                            ref.policy(
+                                org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter
+                                    .ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)))
         .exceptionHandling(
             ex ->
                 ex.authenticationEntryPoint(apiAuthenticationEntryPoint)

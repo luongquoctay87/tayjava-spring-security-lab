@@ -34,6 +34,7 @@ public class SecurityConfig {
                     .anyRequest()
                     .authenticated())
         .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // lesson-15 covers CSRF in depth
+        .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // lesson-15 covers CSRF in depth
         .httpBasic(Customizer.withDefaults())
         .formLogin(Customizer.withDefaults());
     return http.build();

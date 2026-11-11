@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -43,7 +44,8 @@ public class WebSecurityConfig {
                     .tokenValiditySeconds(86400))
         .sessionManagement(
             sm ->
-                sm.sessionFixation(sf -> sf.changeSessionId())
+                sm.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                    .sessionFixation(sf -> sf.changeSessionId())
                     .maximumSessions(1)
                     .maxSessionsPreventsLogin(false))
         .logout(

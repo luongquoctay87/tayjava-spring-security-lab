@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-20-rbac` |
-| Parent | `lesson-19-authorization-manager` |
-| Lesson | 20 — RBAC with AppUser / Role / Permission |
-| What changed | JPA entities + repositories; `JpaUserDetailsService`; `RbacDataSeeder`; `ddl/` schema/seed reference; H2 for lab runtime |
+| Branch | `lesson-21-stateless` |
+| Parent | `lesson-20-rbac` |
+| Lesson | 21 — Stateless API chain |
+| What changed | Reinforce `/api/**` `STATELESS` (requestCache off, `HttpStatusEntryPoint` 401); web stays `IF_REQUIRED`; prove no `JSESSIONID` on API |
 
 ## Demo users
 

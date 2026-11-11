@@ -3,6 +3,7 @@ package com.tayjava.service;
 import com.tayjava.common.dto.auth.TokenResp;
 import com.tayjava.config.security.JwtProperties;
 import com.tayjava.config.security.OtpAuthenticationToken;
+import com.tayjava.repository.AppUserRepository;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -17,8 +18,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 /**
- * Lesson 23: issue HS256 access tokens. Roles go into claim {@code roles} (no {@code ROLE_}
- * prefix); fine-grained permissions into claim {@code permissions} for the JWT filter lesson.
+ * Lesson 34: issue HS256 access tokens including tenant_id claim for isolation.
  */
 @Service
 @RequiredArgsConstructor
@@ -26,6 +26,7 @@ public class AccessTokenService {
 
   private final JwtEncoder jwtEncoder;
   private final JwtProperties properties;
+  private final AppUserRepository appUserRepository;
 
   public TokenResp issue(Authentication authentication) {
     Instant now = Instant.now();
@@ -44,6 +45,12 @@ public class AccessTokenService {
             .filter(a -> !a.startsWith("ROLE_"))
             .toList();
 
+    String tenantId =
+        appUserRepository
+            .findByUsername(authentication.getName())
+            .map(u -> u.getTenantId())
+            .orElse("acme");
+
     JwtClaimsSet claims =
         JwtClaimsSet.builder()
             .issuer(properties.issuer())
@@ -54,6 +61,7 @@ public class AccessTokenService {
             .id(UUID.randomUUID().toString())
             .claim("roles", roles)
             .claim("permissions", permissions)
+            .claim("tenant_id", tenantId)
             .claim(
                 "amr",
                 authentication instanceof OtpAuthenticationToken
@@ -61,7 +69,6 @@ public class AccessTokenService {
                     : List.of("pwd"))
             .build();
 
-    // No kid: ImmutableSecret has a single key; a kid header makes Nimbus fail key selection.
     JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
     String value =
         jwtEncoder.encode(JwtEncoderParameters.from(header, claims)).getTokenValue();

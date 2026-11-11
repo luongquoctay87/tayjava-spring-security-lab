@@ -1,6 +1,6 @@
-# lesson-32-otp-provider
+# lesson-34-multi-tenant
 
-- **Parent:** `lesson-29-resource-server`
-- **What changed:** Custom `AuthenticationProvider` stack for two-step login — `MfaAwareAuthenticationProvider` wraps Dao for INSTRUCTOR/ADMIN, opaque MFA ticket + `OtpAuthenticationProvider` on `POST /api/auth/mfa/verify`; lab OTP via `tayjava.mfa.lab-code` (no external authenticator)
+- **Parent:** `lesson-32-otp-provider`
+- **What changed:** Shared-schema multi-tenant isolation — `app_user.tenant_id`, JWT `tenant_id` claim, `TenantContextFilter`, course mutations reject cross-tenant access; seed `gina.teacher` in `globex`
 
 Run: `./mvnw -q test`

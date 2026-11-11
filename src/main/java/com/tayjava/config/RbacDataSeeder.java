@@ -46,10 +46,11 @@ public class RbacDataSeeder implements ApplicationRunner {
     Map<String, com.tayjava.entity.Role> roles = seedRoles(permissions);
     String hash = passwordEncoder.encode("demo1234");
 
-    seedUser("an.student", hash, "an.student@tayjava.com", roles.get(Role.STUDENT));
-    seedUser("bao.teacher", hash, "bao.teacher@tayjava.com", roles.get(Role.INSTRUCTOR));
-    seedUser("chi.teacher", hash, "chi.teacher@tayjava.com", roles.get(Role.INSTRUCTOR));
-    seedUser("root.admin", hash, "root.admin@tayjava.com", roles.get(Role.ADMIN));
+    seedUser("an.student", hash, "an.student@tayjava.com", "acme", roles.get(Role.STUDENT));
+    seedUser("bao.teacher", hash, "bao.teacher@tayjava.com", "acme", roles.get(Role.INSTRUCTOR));
+    seedUser("chi.teacher", hash, "chi.teacher@tayjava.com", "acme", roles.get(Role.INSTRUCTOR));
+    seedUser("root.admin", hash, "root.admin@tayjava.com", "acme", roles.get(Role.ADMIN));
+    seedUser("gina.teacher", hash, "gina.teacher@globex.com", "globex", roles.get(Role.INSTRUCTOR));
   }
 
   private Map<String, Permission> seedPermissions() {
@@ -100,8 +101,12 @@ public class RbacDataSeeder implements ApplicationRunner {
   }
 
   private void seedUser(
-      String username, String passwordHash, String email, com.tayjava.entity.Role role) {
-    AppUser user = new AppUser(username, passwordHash, email);
+      String username,
+      String passwordHash,
+      String email,
+      String tenantId,
+      com.tayjava.entity.Role role) {
+    AppUser user = new AppUser(username, passwordHash, email, tenantId);
     user.setRoles(Set.of(role));
     appUserRepository.save(user);
   }

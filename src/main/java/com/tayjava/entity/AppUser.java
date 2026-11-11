@@ -40,6 +40,10 @@ public class AppUser {
   @Column(nullable = false)
   private boolean enabled = true;
 
+  /** Lesson 34: shared-schema tenant key (JWT claim tenant_id). */
+  @Column(name = "tenant_id", nullable = false, length = 64)
+  private String tenantId = "acme";
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_role",
@@ -48,8 +52,13 @@ public class AppUser {
   private Set<Role> roles = new HashSet<>();
 
   public AppUser(String username, String password, String email) {
+    this(username, password, email, "acme");
+  }
+
+  public AppUser(String username, String password, String email, String tenantId) {
     this.username = username;
     this.password = password;
     this.email = email;
+    this.tenantId = tenantId;
   }
 }

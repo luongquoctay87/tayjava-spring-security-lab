@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -68,7 +69,8 @@ public class ApiSecurityConfig {
                 oauth2
                     .authenticationEntryPoint(apiAuthenticationEntryPoint)
                     .accessDeniedHandler(apiAccessDeniedHandler)
-                    .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+                    .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
+        .addFilterAfter(new TenantContextFilter(), BearerTokenAuthenticationFilter.class);
     return http.build();
   }
 }

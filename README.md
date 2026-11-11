@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-32-otp-provider` |
-| Parent | `lesson-29-resource-server` |
-| Lesson | 32 — Custom AuthenticationProvider OTP |
-| What changed | MFA for INSTRUCTOR/ADMIN via custom providers; `POST /api/auth/mfa/verify`; lab OTP `123456` |
+| Branch | `lesson-34-multi-tenant` |
+| Parent | `lesson-32-otp-provider` |
+| Lesson | 34 — Multi-tenant user isolation |
+| What changed | `tenant_id` on users/JWT + TenantContext; cross-tenant course mutation denied |
 
 ## Demo users
 
@@ -53,7 +53,8 @@ This repository is a companion for learning — not the TayJava production backe
 | `an.student` | `demo1234` | `ROLE_STUDENT`, `course:read`, `enrollment:*` |
 | `bao.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, owns course `1` |
 | `chi.teacher` | `demo1234` | `ROLE_INSTRUCTOR`, owns course `2` (ownership demos) |
-| `root.admin` | `demo1234` | `ROLE_ADMIN` + all permissions incl. `course:delete` |
+| `root.admin` | `demo1234` | `ROLE_ADMIN` + all permissions incl. `course:delete` (tenant `acme`) |
+| `gina.teacher` | `demo1234` | `ROLE_INSTRUCTOR` in tenant `globex` |
 
 ## Run
 

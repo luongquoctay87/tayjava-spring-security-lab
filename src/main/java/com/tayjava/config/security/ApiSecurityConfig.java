@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson 26: API chain with Bearer JWT plus {@link ApiAuthenticationEntryPoint} /
+ * Lesson 32: API chain with Bearer JWT plus MFA verify; {@link ApiAuthenticationEntryPoint} /
  * {@link ApiAccessDeniedHandler} writing the {@code Resp} envelope for 401/403.
  */
 @Configuration
@@ -32,7 +32,11 @@ public class ApiSecurityConfig {
         .authorizeHttpRequests(
             auth ->
                 auth.requestMatchers(
-                        HttpMethod.POST, "/api/auth/login", "/api/auth/refresh", "/api/auth/logout")
+                        HttpMethod.POST,
+                        "/api/auth/login",
+                        "/api/auth/mfa/verify",
+                        "/api/auth/refresh",
+                        "/api/auth/logout")
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/courses", "/api/courses/*")
                     .permitAll()

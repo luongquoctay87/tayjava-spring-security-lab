@@ -13,6 +13,8 @@ spring:
             scope: read:user, user:email
 
 tayjava:
+  mfa:
+    lab-code: "123456"
   jwt:
     secret: lab-test-secret-must-be-32chars!!
     issuer: https://tayjava.com

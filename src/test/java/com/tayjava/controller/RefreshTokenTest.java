@@ -95,14 +95,6 @@ class RefreshTokenTest {
   }
 
   private MvcResult login(String username, String password) throws Exception {
-    return mockMvc
-        .perform(
-            post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(
-                    "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.refreshToken").isString())
-        .andReturn();
+    return com.tayjava.config.security.AuthLoginSupport.loginResult(mockMvc, username, password);
   }
 }

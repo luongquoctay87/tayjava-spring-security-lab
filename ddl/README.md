@@ -5,6 +5,7 @@
 | `001_rbac_schema.sql` | `app_user` / `role` / `permission` + join tables |
 | `002_rbac_seed.sql` | Reference seed for `an.student`, `bao.teacher`, `chi.teacher`, `root.admin` |
 | `003_refresh_token.sql` | `refresh_token` table (hash, family, revoke columns) |
+| `004_mfa_notes.sql` | MFA column sketch (lab uses in-memory tickets + fixed lab OTP) |
 
 ## Lab runtime
 

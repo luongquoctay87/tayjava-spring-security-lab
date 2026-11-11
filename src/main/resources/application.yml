@@ -34,6 +34,9 @@ server:
   port: 8080
 
 tayjava:
+  mfa:
+    # Lab-only fixed OTP — never use a fixed code in production.
+    lab-code: ${TAYJAVA_MFA_LAB_CODE:123456}
   jwt:
     # Required — set via env (no in-repo secret). Tests override in src/test/resources.
     secret: ${TAYJAVA_JWT_SECRET}

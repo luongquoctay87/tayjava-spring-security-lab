@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-29-resource-server` |
-| Parent | `lesson-28-oauth2-login` |
-| Lesson | 29 — Resource Server JWT / opaque |
-| What changed | Default: self-issued HS256 Resource Server; profile `external-jwt` uses `issuer-uri`/JWKS; profile `opaque` documents introspection |
+| Branch | `lesson-32-otp-provider` |
+| Parent | `lesson-29-resource-server` |
+| Lesson | 32 — Custom AuthenticationProvider OTP |
+| What changed | MFA for INSTRUCTOR/ADMIN via custom providers; `POST /api/auth/mfa/verify`; lab OTP `123456` |
 
 ## Demo users
 

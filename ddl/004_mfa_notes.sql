@@ -1,0 +1,7 @@
+-- Lesson 32: MFA tickets are in-memory for the lab (see MfaTicketStore).
+-- Production sketch — per-user TOTP secret (not applied by the H2 lab runtime):
+--
+-- ALTER TABLE app_user ADD COLUMN IF NOT EXISTS mfa_enabled BOOLEAN NOT NULL DEFAULT FALSE;
+-- ALTER TABLE app_user ADD COLUMN IF NOT EXISTS totp_secret VARCHAR(64);
+--
+-- Opaque MFA tickets belong in a short-TTL store (Redis), not this table.

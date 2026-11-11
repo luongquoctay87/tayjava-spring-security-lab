@@ -2,6 +2,7 @@ package com.tayjava.service;
 
 import com.tayjava.common.dto.auth.TokenResp;
 import com.tayjava.config.security.JwtProperties;
+import com.tayjava.config.security.OtpAuthenticationToken;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +54,11 @@ public class AccessTokenService {
             .id(UUID.randomUUID().toString())
             .claim("roles", roles)
             .claim("permissions", permissions)
+            .claim(
+                "amr",
+                authentication instanceof OtpAuthenticationToken
+                    ? List.of("pwd", "otp")
+                    : List.of("pwd"))
             .build();
 
     // No kid: ImmutableSecret has a single key; a kid header makes Nimbus fail key selection.

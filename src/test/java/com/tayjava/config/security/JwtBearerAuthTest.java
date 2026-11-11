@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.jayway.jsonpath.JsonPath;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -70,15 +68,6 @@ class JwtBearerAuthTest {
   }
 
   private String login(String username, String password) throws Exception {
-    MvcResult result =
-        mockMvc
-            .perform(
-                post("/api/auth/login")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(
-                        "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}"))
-            .andExpect(status().isOk())
-            .andReturn();
-    return JsonPath.read(result.getResponse().getContentAsString(), "$.accessToken");
+    return AuthLoginSupport.accessToken(mockMvc, username, password);
   }
 }

@@ -1,6 +1,7 @@
 package com.tayjava.config.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -20,7 +21,9 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
+  /** Default manager for form login / remember-me (no MFA wrapper). */
   @Bean
+  @Primary
   AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
       throws Exception {
     return configuration.getAuthenticationManager();

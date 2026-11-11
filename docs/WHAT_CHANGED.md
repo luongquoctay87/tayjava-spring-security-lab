@@ -1,6 +1,6 @@
-# lesson-24-jwt-filter
+# lesson-25-refresh-token
 
-- **Parent:** `lesson-23-jwt-login`
-- **What changed:** Wire `oauth2ResourceServer().jwt()` on `/api/**` (`BearerTokenAuthenticationFilter`); map claim `roles` + `permissions` via `JwtAuthenticationConverter`; drop API `httpBasic`
+- **Parent:** `lesson-24-jwt-filter`
+- **What changed:** Access + refresh pair on login; `POST /api/auth/refresh` with rotation + family revoke on replay; `POST /api/auth/logout`; `RefreshToken` entity + `ddl/003_refresh_token.sql`
 
 Run: `./mvnw -q test`

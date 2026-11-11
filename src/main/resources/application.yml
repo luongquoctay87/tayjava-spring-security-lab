@@ -28,6 +28,7 @@ tayjava:
     issuer: https://tayjava.com
     audience: tayjava-api
     access-token-ttl: PT15M
+    refresh-token-ttl: P14D
 
 logging:
   level:

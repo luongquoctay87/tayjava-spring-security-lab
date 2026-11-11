@@ -1,10 +1,10 @@
 package com.tayjava.controller;
 
 import com.tayjava.common.dto.auth.LoginReq;
+import com.tayjava.common.dto.auth.RefreshReq;
 import com.tayjava.common.dto.auth.TokenResp;
-import com.tayjava.service.AccessTokenService;
+import com.tayjava.service.RefreshTokenService;
 import jakarta.validation.Valid;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
- * Lesson 23: {@code POST /api/auth/login} authenticates via {@link AuthenticationManager} and
- * returns a signed JWT. Refresh remains a stub until the refresh-token lesson.
+ * Lesson 25: login issues access+refresh; refresh rotates with replay detection; logout revokes the
+ * refresh family.
  */
 @RestController
 @RequestMapping("/api/auth")
@@ -30,7 +30,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class AuthController {
 
   private final AuthenticationManager authenticationManager;
-  private final AccessTokenService accessTokenService;
+  private final RefreshTokenService refreshTokenService;
 
   @PostMapping("/login")
   public ResponseEntity<TokenResp> login(@Valid @RequestBody LoginReq request) {
@@ -39,8 +39,8 @@ public class AuthController {
           authenticationManager.authenticate(
               UsernamePasswordAuthenticationToken.unauthenticated(
                   request.username(), request.password()));
-      log.debug("Issued access token for {}", request.username());
-      return ResponseEntity.ok(accessTokenService.issue(authentication));
+      log.debug("Issued token pair for {}", request.username());
+      return ResponseEntity.ok(refreshTokenService.issuePair(authentication));
     } catch (AuthenticationException ex) {
       throw new ResponseStatusException(
           HttpStatus.UNAUTHORIZED, "Invalid username or password");
@@ -48,7 +48,13 @@ public class AuthController {
   }
 
   @PostMapping("/refresh")
-  public ResponseEntity<Map<String, String>> refresh() {
-    return ResponseEntity.ok(Map.of("status", "refresh-stub"));
+  public ResponseEntity<TokenResp> refresh(@Valid @RequestBody RefreshReq request) {
+    return ResponseEntity.ok(refreshTokenService.rotate(request.refreshToken()));
+  }
+
+  @PostMapping("/logout")
+  public ResponseEntity<Void> logout(@Valid @RequestBody RefreshReq request) {
+    refreshTokenService.logout(request.refreshToken());
+    return ResponseEntity.noContent().build();
   }
 }

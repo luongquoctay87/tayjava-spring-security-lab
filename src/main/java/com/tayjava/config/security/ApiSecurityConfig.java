@@ -13,8 +13,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson 24: {@code oauth2ResourceServer().jwt()} registers {@code BearerTokenAuthenticationFilter}
- * on the {@code /api/**} chain. API clients authenticate with {@code Authorization: Bearer}.
+ * API chain: STATELESS Bearer JWT. Auth login/refresh/logout are permitAll; protected routes use
+ * {@code oauth2ResourceServer().jwt()}.
  */
 @Configuration
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class ApiSecurityConfig {
     http.securityMatcher("/api/**")
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/refresh")
+                auth.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/refresh", "/api/auth/logout")
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/courses", "/api/courses/*")
                     .permitAll()

@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-24-jwt-filter` |
-| Parent | `lesson-23-jwt-login` |
-| Lesson | 24 — JWT authentication filter in the API chain |
-| What changed | `oauth2ResourceServer().jwt()` registers `BearerTokenAuthenticationFilter`; roles+permissions converter; API uses Bearer (no httpBasic) |
+| Branch | `lesson-25-refresh-token` |
+| Parent | `lesson-24-jwt-filter` |
+| Lesson | 25 — Refresh tokens and revocation |
+| What changed | Login returns access+refresh; `POST /api/auth/refresh` rotates with replay→family revoke; `POST /api/auth/logout`; `ddl/003_refresh_token.sql` |
 
 ## Demo users
 
@@ -65,6 +65,7 @@ export TAYJAVA_JWT_SECRET="$(openssl rand -base64 32)"
 curl -s -X POST http://localhost:8080/api/auth/login \
   -H 'Content-Type: application/json' \
   -d '{"username":"an.student","password":"demo1234"}'
+# Then: POST /api/auth/refresh with {"refreshToken":"..."} ; POST /api/auth/logout to revoke
 ```
 
 See `.env.example` for the env var name. Never commit a real secret.

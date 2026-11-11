@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-39-mockmvc-security` |
-| Parent | `lesson-37-brute-force` |
-| Lesson | 39 — @WithMockUser / MockMvc security |
-| What changed | Parameterized role×endpoint MockMvc matrix and @WithMockUser coverage |
+| Branch | `lesson-40-jwt-oauth-test` |
+| Parent | `lesson-39-mockmvc-security` |
+| Lesson | 40 — Test JWT + OAuth2 flows |
+| What changed | JWT decode + jwt()/oauth2Login() MockMvc tests without external IdP secrets |
 
 ## Demo users
 

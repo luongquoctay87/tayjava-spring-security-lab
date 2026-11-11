@@ -1,6 +1,6 @@
-# lesson-39-mockmvc-security
+# lesson-40-jwt-oauth-test
 
-- **Parent:** `lesson-37-brute-force`
-- **What changed:** Role×endpoint parameterized MockMvc matrix + `@WithMockUser` examples for happy/401/403 paths
+- **Parent:** `lesson-39-mockmvc-security`
+- **What changed:** Dedicated JWT + OAuth2 MockMvc flow tests using `jwt()` / `oauth2Login()` post-processors — no real Google/GitHub secrets
 
 Run: `./mvnw -q test`

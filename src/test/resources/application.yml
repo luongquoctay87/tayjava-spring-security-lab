@@ -1,0 +1,6 @@
+tayjava:
+  jwt:
+    secret: lab-test-secret-must-be-32chars!!
+    issuer: https://tayjava.com
+    audience: tayjava-api
+    access-token-ttl: PT15M

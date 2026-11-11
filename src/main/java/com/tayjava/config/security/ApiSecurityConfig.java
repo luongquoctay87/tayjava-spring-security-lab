@@ -15,8 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 /**
- * Lesson 21: reinforce {@code STATELESS} for {@code /api/**} — no session, no request cache,
- * plain 401 (JWT login arrives in the next lessons).
+ * API chain: {@code STATELESS}, CSRF off, {@code POST /api/auth/login} permitAll. Lesson 23 issues
+ * JWT at login; Bearer verification via {@code oauth2ResourceServer} arrives in the next lesson —
+ * {@code httpBasic} remains so existing MockMvc user processors still exercise authorize rules.
  */
 @Configuration
 @RequiredArgsConstructor

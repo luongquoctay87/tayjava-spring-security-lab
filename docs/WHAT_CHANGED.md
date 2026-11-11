@@ -1,6 +1,6 @@
-# lesson-21-stateless
+# lesson-23-jwt-login
 
-- **Parent:** `lesson-20-rbac`
-- **What changed:** Reinforce API `SessionCreationPolicy.STATELESS` + no request cache + 401 entry point; web remains sessionful
+- **Parent:** `lesson-21-stateless`
+- **What changed:** `POST /api/auth/login` authenticates via `AuthenticationManager` and returns an HS256 JWT (`TokenResp`); `JwtEncoder`/`JwtDecoder` + `tayjava.jwt.*` (secret from `TAYJAVA_JWT_SECRET`)
 
-Run: `./mvnw -q test`
+Run: `export TAYJAVA_JWT_SECRET="$(openssl rand -base64 32)" && ./mvnw -q test`

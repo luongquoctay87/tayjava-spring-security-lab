@@ -20,7 +20,7 @@ This repository is a companion for learning — not the TayJava production backe
 | Language | Java 21 |
 | Framework | Spring Boot 4.0.9 + Spring Security 7.x |
 | Web | Spring MVC (`spring-boot-starter-webmvc`) |
-| Security | `spring-boot-starter-security` + `spring-security-test` |
+| Security | `spring-boot-starter-security` + `spring-boot-starter-security-oauth2-resource-server` + `spring-security-test` |
 | Build | Maven Wrapper (`./mvnw`) |
 | Persistence | Spring Data JPA + H2 (lab); `ddl/` for PostgreSQL reference |
 | Tests | JUnit 5, MockMvc / `@WithMockUser`, Testcontainers (later) |
@@ -41,10 +41,10 @@ This repository is a companion for learning — not the TayJava production backe
 
 | | |
 |---|---|
-| Branch | `lesson-21-stateless` |
-| Parent | `lesson-20-rbac` |
-| Lesson | 21 — Stateless API chain |
-| What changed | Reinforce `/api/**` `STATELESS` (requestCache off, `HttpStatusEntryPoint` 401); web stays `IF_REQUIRED`; prove no `JSESSIONID` on API |
+| Branch | `lesson-23-jwt-login` |
+| Parent | `lesson-21-stateless` |
+| Lesson | 23 — Login API that returns JWT |
+| What changed | `POST /api/auth/login` → HS256 access token via `AuthenticationManager` + `JwtEncoder`; secret from `TAYJAVA_JWT_SECRET` |
 
 ## Demo users
 
@@ -58,9 +58,16 @@ This repository is a companion for learning — not the TayJava production backe
 ## Run
 
 ```bash
+export TAYJAVA_JWT_SECRET="$(openssl rand -base64 32)"
 ./mvnw spring-boot:run
 # RBAC seed runs on empty DB (an.student / bao.teacher / chi.teacher / root.admin)
+
+curl -s -X POST http://localhost:8080/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"an.student","password":"demo1234"}'
 ```
+
+See `.env.example` for the env var name. Never commit a real secret.
 
 ## DDL
 
@@ -82,5 +89,6 @@ See the full Parent→Branch map in `blogs/java/spring-security/lab-samples-map.
 | 06 | `lesson-06-security-filter-chain` |
 | 16 | `lesson-16-authorize-http` |
 | 20 | `lesson-20-rbac` |
+| 23 | `lesson-23-jwt-login` |
 | 26 | `lesson-26-auth-entry-point` |
 | 42 | `lesson-42-capstone` |

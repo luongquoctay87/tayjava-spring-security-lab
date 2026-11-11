@@ -77,7 +77,16 @@ class AuthorizeHttpRequestsTest {
 
   @Test
   void authLoginIsPublic() throws Exception {
-    mockMvc.perform(post("/api/auth/login")).andExpect(status().isOk());
+    mockMvc
+        .perform(
+            post("/api/auth/login")
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .content(
+                    """
+                    {"username":"an.student","password":"demo1234"}
+                    """))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.accessToken").isString());
   }
 
   @Test
